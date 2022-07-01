@@ -18,7 +18,15 @@ export default (srcPath: string) => {
       jsx: 'preact'
     }),
     AutoImport({
-      imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/core']
+      imports: [
+        'vue',
+        'vue-router',
+        'vue-i18n',
+        '@vueuse/core',
+        {
+          'vue-router': ['RouterView', 'RouterLink']
+        }
+      ]
     }),
     Components({
       dts: true,
