@@ -1,0 +1,35 @@
+@import './common/transition.css';
+
+/*滚动条整体样式*/
+::-webkit-scrollbar {
+  width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+}
+
+/*滚动条里面轨道*/
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+  background: #1f222a;
+}
+
+/*滚动条里面小方块*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border-style: dashed;
+  border-color: transparent;
+  border-width: 4px;
+  background-color: rgba(157, 165, 183, 0.4);
+  background-clip: padding-box;
+  transition: 0.6s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(157, 165, 183, 0.7);
+}
+
+.drag {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}

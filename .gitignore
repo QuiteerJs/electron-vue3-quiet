@@ -1,0 +1,9 @@
+logs
+yarn-debug.log*
+yarn-error.log*
+
+node_modules
+dist
+out
+*.local
+stats.html

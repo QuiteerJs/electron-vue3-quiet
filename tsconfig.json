@@ -1,0 +1,43 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": true,
+    // 元素隐式具有 "any" 类型，因为类型为 "string" 的表达式不能用于索引类型 "xx"
+    "suppressImplicitAnyIndexErrors": true,
+    // "noImplicitThis": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "declaration": false,
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["esnext", "DOM"],
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "types": ["node", "vite/client", "naive-ui/volar", "unplugin-icons/types/vue"],
+    "paths": {
+      "@common/*": ["src/common/*"],
+      "~/*": ["src/main/*"],
+      "@/*": ["src/renderer/*"]
+    },
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "build/**/*.ts",
+    "global/*",
+    "vite.config.ts",
+    "builder.ts"
+  ],
+  "exclude": ["node_modules"]
+}

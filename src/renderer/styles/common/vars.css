@@ -1,0 +1,13 @@
+:root {
+  --main-color: #4d4e53;
+  --main-bg: rgb(255, 255, 255);
+  --logo-border-color: rebeccapurple;
+
+  --header-height: 68px;
+  --content-padding: 10px 20px;
+
+  --base-line-height: 1.428571429;
+  --transition-duration: 0.35s;
+  --external-link: 'external link';
+  --margin-top: calc(2vh + 20px);
+}
