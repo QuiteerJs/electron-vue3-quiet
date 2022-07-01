@@ -1,0 +1,36 @@
+{
+  //控制编辑器是否显示控制字符。
+  "editor.renderControlCharacters": true,
+  //控制资源管理器是否在把文件删除到废纸篓时进行确认。
+  "explorer.confirmDelete": false,
+  // 控制在资源管理器内拖放移动文件或文件夹时是否进行确认。
+  "explorer.confirmDragAndDrop": false,
+  //控制折行的方式。
+  "editor.wordWrap": "on",
+  //保存自动调整代码
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  //制表符符号eslint
+  "editor.tabSize": 2,
+  // 控制是否在编辑器中自动显示内联建议。
+  "editor.inlineSuggest.enabled": true,
+  // 控制是否突出显示可能与基本 ASCII 字符混淆的字符，但当前用户区域设置中常见的字符除外。
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  // ? 格式化
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  //若为 true，Emmet 建议将显示为代码片段。可以在 #editor.snippetSuggestions# 设置中排列其顺序。
+  "emmet.showSuggestionsAsSnippets": true,
+  //启用后，按下 TAB 键，将展开 Emmet 缩写。
+  "emmet.triggerExpansionOnTab": true,
+  // 开启 vscode 文件路径导航
+  "breadcrumbs.enabled": true,
+  // 解决css 中 @apply调用警告
+  "scss.lint.unknownAtRules": "ignore",
+  "css.lint.unknownAtRules": "ignore",
+  //配置语言的文件关联 (如: "*.extension": "html")。这些关联的优先级高于已安装语言的默认关联
+  "files.associations": {
+    "*.wxss": "css",
+    "*.wxml": "html",
+    "*.tsx": "javascriptreact"
+  }
+}

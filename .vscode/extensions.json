@@ -1,0 +1,56 @@
+{
+  "recommendations": [
+    // 汉化插件
+    "ms-ceintl.vscode-language-pack-zh-hans",
+    // 标签输入相关
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-complete-tag",
+    "formulahendry.auto-rename-tag",
+    // electron片段
+    "antoniormrzz.electron-snippets",
+    // es6片段
+    "xabikos.javascriptsnippets",
+    // naive-ui片段
+    "jimdong.naive-ui-snippets",
+    // 路径提示
+    "christian-kohler.path-intellisense",
+    // 注释美化
+    "aaron-bond.better-comments",
+    // 便捷console
+    "whtouche.vscode-js-console-utils",
+    // 块注释
+    "lllllllqw.jsdoc",
+    // 错误行内显示
+    "usernamehw.errorlens",
+    // 颜色高亮
+    "naumovs.color-highlight",
+    // env高亮
+    "mikestead.dotenv",
+    // icon预览
+    "antfu.iconify",
+    // 图片预览
+    "kisstkondoros.vscode-gutter-preview",
+    // 编辑器配置
+    "editorconfig.editorconfig",
+    // 计算引入包大小
+    "wix.vscode-import-cost",
+    // 即时搜索icon
+    "afzalsayed96.icones",
+    // ts@next版本
+    "ms-vscode.vscode-typescript-next",
+    // json转ts类型
+    "mariusalchimavicius.json-to-ts",
+    // 代码规范
+    "dbaeumer.vscode-eslint",
+    // prettier格式化
+    "esbenp.prettier-vscode",
+    // prettier-eslint格式化
+    "rvest.vs-code-prettier-eslint",
+    // ts-vue组件类型
+    "vue.vscode-typescript-vue-plugin",
+    // vue3语法支持
+    "vue.volar",
+    // windicss语法提示
+    "voorjaar.windicss-intellisense"
+  ]
+}
