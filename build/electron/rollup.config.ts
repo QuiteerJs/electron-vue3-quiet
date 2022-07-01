@@ -19,9 +19,9 @@ import { defineConfig } from 'rollup'
 
 import { dependencies } from '../../package.json'
 
-const resolve = filePath => path.resolve(__dirname, `../../${filePath}`)
+const resolve = (filePath: string) => path.resolve(__dirname, `../../${filePath}`)
 
-const transformEnv = env => {
+const transformEnv = (env: NodeJS.ProcessEnv) => {
   const prefix = 'process.env.'
   const envObj = {}
   Object.entries(env).forEach(([key, value]) => {
@@ -30,7 +30,7 @@ const transformEnv = env => {
   return envObj
 }
 
-export default env => {
+export default (env: NodeJS.ProcessEnv) => {
   return defineConfig({
     input: resolve('src/main/index.ts'),
     output: {
@@ -47,7 +47,9 @@ export default env => {
       alias({
         entries: [
           { find: '~', replacement: resolve('src/main') },
-          { find: '@common', replacement: resolve('src/common') }
+          { find: '@common', replacement: resolve('src/common') },
+          { find: '@enums', replacement: resolve('src/enums') },
+          { find: '@typeorm', replacement: resolve('src/typeorm') }
         ]
       }),
       commonjs({

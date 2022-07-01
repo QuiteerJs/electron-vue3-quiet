@@ -24,7 +24,7 @@ declare const PROJECT_BUILD_TIME: string
 declare namespace NodeJS {
   export interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production'
-    readonly PORT: string
+    readonly PORT?: string
     readonly VITE_BASE_URL: string
     readonly VITE_UPLOAD_URL: string
     readonly VITE_BASE_PROT: string

@@ -1,6 +1,5 @@
-import type { ConfigEnv, PluginOption } from 'vite'
+import type { PluginOption } from 'vite'
 import path from 'path'
-import child_process from 'child_process'
 import chalk from 'chalk'
 import { config as getEnv } from 'dotenv'
 import { rollup, OutputOptions } from 'rollup'
@@ -20,8 +19,9 @@ export function build(viteEnv: ImportMetaEnv): PluginOption {
       console.log(`\n${doneLog}主进程代码开始构建`)
       console.time(timeKey)
       // 启动环境变量
+      const { parsed: globalEnv } = getEnv({ path: path.resolve(process.cwd(), '.env') })
       const { parsed: env } = getEnv({ path: path.resolve(process.cwd(), '.env.production') })
-      const config = getConfig(env)
+      const config = getConfig({ ...globalEnv, ...env } as NodeJS.ProcessEnv)
 
       const rollupBuild = await rollup(config)
 

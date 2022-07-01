@@ -6,7 +6,7 @@ import path from 'path'
 import chalk from 'chalk'
 import { getPortPromise } from 'portfinder'
 
-let mainProcess: ChildProcess
+let mainProcess: ChildProcess | null
 
 export function dev(viteEnv: ImportMetaEnv): PluginOption {
   return {
@@ -19,28 +19,30 @@ export function dev(viteEnv: ImportMetaEnv): PluginOption {
       return { server: { port } }
     },
     configResolved(resolvedConfig: ResolvedConfig) {
-      if (mainProcess && mainProcess.kill) {
-        process.kill(mainProcess.pid)
+      if (mainProcess) {
+        mainProcess.pid && process.kill(mainProcess.pid)
         mainProcess = null
       }
 
       const execJavascript = path.resolve(__dirname, 'dev-script.ts')
       mainProcess = exec(`npx esno ${execJavascript} ${resolvedConfig.server.port}`)
 
-      mainProcess.stdout.on('data', data => mainLog('green', data))
-      mainProcess.stderr.on('data', data => mainLog('red', data))
+      if (mainProcess) {
+        mainProcess.stdout && mainProcess.stdout.on('data', data => mainLog('green', data))
+        mainProcess.stderr && mainProcess.stderr.on('data', data => mainLog('red', data))
 
-      mainProcess.on('close', () => {
-        mainLog('blue', ' 服务关闭 ')
-        process.exit()
-      })
+        mainProcess.on('close', () => {
+          mainLog('blue', ' 服务关闭 ')
+          process.exit()
+        })
+      }
     }
   }
 }
 
-function mainLog(color: 'blue' | 'red' | 'green', data) {
+function mainLog(color: 'blue' | 'red' | 'green', data: string) {
   const msg = data.toString().trim()
-  const chalkLog = ctx => chalk[color].bold(ctx)
+  const chalkLog = (ctx: string) => chalk[color].bold(ctx)
   const start = chalkLog(`┏ 主进程日志 ${new Date().toLocaleTimeString()} ---------------------`)
   const end = chalkLog('┗ --------------------------------------------')
 

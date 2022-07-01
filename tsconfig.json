@@ -24,7 +24,9 @@
     "importHelpers": true,
     "types": ["node", "vite/client", "naive-ui/volar", "unplugin-icons/types/vue"],
     "paths": {
-      "@common/*": ["src/common/*"],
+      "@common/*": ["src/commom/*"],
+      "@enums/*": ["src/enums/*"],
+      "@typeorm/*": ["src/typeorm/*"],
       "~/*": ["src/main/*"],
       "@/*": ["src/renderer/*"]
     },

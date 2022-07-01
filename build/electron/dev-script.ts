@@ -9,10 +9,12 @@ import electron from 'electron'
 
 const [, , currentPort] = process.argv
 
+const { parsed: globalEnv } = getEnv({ path: path.resolve(process.cwd(), '.env') })
 const { parsed: env } = getEnv({ path: path.resolve(process.cwd(), '.env.development') })
-const mainOptions = getOption({ ...env, PORT: currentPort })
 
-const resolve = filePath => path.resolve(__dirname, `../../${filePath}`)
+const mainOptions = getOption({ ...env, ...globalEnv, PORT: currentPort } as NodeJS.ProcessEnv)
+
+const resolve = (filePath: string) => path.resolve(__dirname, `../../${filePath}`)
 
 mainReady()
 
@@ -35,13 +37,13 @@ function mainReady() {
   })
 }
 
-let electronProcess: ChildProcessWithoutNullStreams
+let electronProcess: ChildProcessWithoutNullStreams | null
 let manualRestart = false
 
 function startElectron() {
-  if (electronProcess && electronProcess.kill) {
+  if (electronProcess) {
     manualRestart = true
-    let res = process.kill(electronProcess.pid)
+    electronProcess.pid && process.kill(electronProcess.pid)
     electronProcess = null
 
     setTimeout(() => {
@@ -60,7 +62,7 @@ function startElectron() {
   })
 }
 
-function removeJunk(chunk) {
+function removeJunk(chunk: string) {
   if (/\d+-\d+-\d+ \d+:\d+:\d+\.\d+ Electron(?: Helper)?\[\d+:\d+] /.test(chunk)) return false
   if (/\[\d+:\d+\/|\d+\.\d+:ERROR:CONSOLE\(\d+\)\]/.test(chunk)) return false
   if (/ALSA lib [a-z]+\.c:\d+:\([a-z_]+\)/.test(chunk)) return false
