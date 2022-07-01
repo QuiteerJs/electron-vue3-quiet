@@ -4,7 +4,7 @@ import {
   EnumThemeTabMode,
   EnumThemeHorizontalMenuPosition,
   EnumThemeAnimateMode
-} from '@common/enums/system'
+} from '@enums/system'
 
 const themeColorList = [
   '#1890ff',

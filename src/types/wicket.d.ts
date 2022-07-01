@@ -6,7 +6,7 @@ declare namespace Wicket {
   // 窗口实例的状态
   interface WinStatus {
     id: number
-    name: import('@common/enums/window').WinKey
+    name: import('@enums/window').WinKey
     isCreate: boolean
     isRead: boolean
     isShow: boolean

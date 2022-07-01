@@ -8,10 +8,10 @@ import { useApi } from '@/hooks'
 export default defineComponent({
   name: 'Layout',
   setup(props, context) {
-    const win = ref<InstanceType<typeof IpcOnMounted>>(null)
+    const win = ref<InstanceType<typeof IpcOnMounted> | null>()
 
     onMounted(async () => {
-      const status = await win.value.winStatus()
+      const status = await win.value?.winStatus()
       console.log('status :>> ', status)
       const { loading, error, result, fetchResource } = useApi<Test.api>(testApi)
     })

@@ -1,5 +1,5 @@
 import { BrowserWindow } from 'electron'
-import { WinKey } from '@common/enums/window'
+import { WinKey } from '@enums/window'
 
 export const winMap = new Map<WinKey, Wicket.WinStatus>()
 
@@ -14,48 +14,52 @@ export const addWin = (key: WinKey, winId: number) => {
   })
 }
 
-export const getWin = (key: WinKey): BrowserWindow => {
-  const { id } = winMap.get(key)
-  return BrowserWindow.fromId(id)
+export const getWin = (key: WinKey): BrowserWindow | null => {
+  const status = winMap.get(key)
+  if (!status) return null
+  return BrowserWindow.fromId(status.id)
 }
 
 export const delWin = (key: WinKey) => winMap.delete(key)
 
 export const hasWin = (key: WinKey): boolean => winMap.has(key)
 
-export const winRead = (winId: number): Wicket.WinStatus => {
-  let state: Wicket.WinStatus
+export const winRead = (winId: number): Wicket.WinStatus | undefined => {
+  let state: Wicket.WinStatus | undefined
 
   for (const [key, { id }] of winMap.entries()) {
-    if (id === winId) {
-      state = winMap.get(key)
-    }
+    if (id === winId) state = winMap.get(key)
   }
 
-  state.isRead = true
+  if (!state) return
 
+  state.isRead = true
   winMap.set(state.name, state)
 
   return state
 }
 
 export const showChange = (key: WinKey, flag: boolean) => {
-  const state: Wicket.WinStatus = winMap.get(key)
-  state.isShow = flag
-  winMap.set(key, state)
+  const state = winMap.get(key)
+  if (state) {
+    state.isShow = flag
+    winMap.set(key, state)
+  }
 }
 
 export const focusChange = (key: WinKey, flag: boolean) => {
-  const state: Wicket.WinStatus = winMap.get(key)
-  state.isFocus = flag
-  winMap.set(key, state)
+  const state = winMap.get(key)
+  if (state) {
+    state.isFocus = flag
+    winMap.set(key, state)
+  }
 }
 
-export const onMounted = (key: WinKey, callback) => {
+export const onMounted = (key: WinKey, callback: () => void) => {
   const status = winMap.get(key)
 
   if (!status?.isCreate) return
-  let id
+  let id: NodeJS.Timer
 
   id = setInterval(() => {
     if (status.isRead) {

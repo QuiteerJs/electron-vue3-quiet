@@ -1,6 +1,6 @@
 import { BrowserWindow, dialog, shell } from 'electron'
 import { addWin, delWin, onMounted, showChange, focusChange } from './win.map'
-import { WinKey } from '@common/enums/window'
+import { WinKey } from '@enums/window'
 import { winURL, appIcon, trayIcon, preloadPath, printInfo } from '~/config/index'
 import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
 

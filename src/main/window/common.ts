@@ -1,7 +1,7 @@
 import { addWin, hasWin, delWin, getWin, onMounted } from './create/win.map'
 import { CreateWebView } from './create/CreateWebView'
 import { CreateWindow } from './create/CreateWindow'
-import { WinKey } from '@common/enums/window'
+import { WinKey } from '@enums/window'
 import { app, BrowserWindow, BrowserView } from 'electron'
 import { handlesInit } from '~/ipc/index'
 
@@ -19,7 +19,7 @@ export function createMainWindow() {
 
   handlesInit()
   onMounted(main.winKey, async () => {
-    getWin(WinKey.LOADING).destroy()
+    getWin(WinKey.LOADING)?.destroy()
     // const webview = new CreateWebView(WinKey.WEBVIEW, { frame: true })
     //   .setSize(1080, 720, true)
     //   .loadURL('https://www.electronjs.org/zh/docs/latest/api/browser-view')

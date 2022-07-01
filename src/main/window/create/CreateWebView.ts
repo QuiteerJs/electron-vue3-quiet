@@ -1,6 +1,6 @@
 import { BrowserWindow, BrowserView, dialog, shell, nativeImage } from 'electron'
 import { addWin, delWin, onMounted, showChange, focusChange } from './win.map'
-import { WinKey } from '@common/enums/window'
+import { WinKey } from '@enums/window'
 import { printInfo, winURL, appIcon, trayIcon, preloadPath } from '~/config/index'
 import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
 import axios from 'axios'

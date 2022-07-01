@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/vue'
 import CardGroup from '@/components/CardGroup'
-import { WinKey } from '@common/enums/window'
+import { WinKey } from '@enums/window'
 
 export default defineComponent({
   name: 'Vue',

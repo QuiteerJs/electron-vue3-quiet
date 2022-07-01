@@ -1,11 +1,11 @@
 import { app, dialog, session, powerSaveBlocker, BrowserWindow } from 'electron'
 import { addWin, hasWin, delWin, getWin, onMounted } from '~/window/create/win.map'
-import { WinKey } from '@common/enums/window'
+import { WinKey } from '@enums/window'
 import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
 import { printInfo } from './log'
 
 class CreateApp {
-  private static _instance: CreateApp = null
+  private static _instance: CreateApp | null = null
   private readyList: any[] = []
   constructor() {
     this.init()
@@ -20,7 +20,7 @@ class CreateApp {
     }
   }
 
-  use(callback) {
+  use(callback: () => void) {
     app.whenReady().then(callback)
     this.readyList.push(callback)
     return this
@@ -46,7 +46,7 @@ class CreateApp {
 
     if (app.requestSingleInstanceLock()) {
       app.on('second-instance', (event, commandLine, workingDirectory) => {
-        hasWin(WinKey.MAIN) && getWin(WinKey.MAIN).show()
+        hasWin(WinKey.MAIN) && getWin(WinKey.MAIN)?.show()
       })
     } else {
       mainProExecFn(app.quit)
@@ -102,12 +102,10 @@ class CreateApp {
           switch (details.reason) {
             case 'crashed':
               message.title = '警告'
-              message.buttons = ['确定', '退出']
               message.message = '硬件加速进程已崩溃，是否关闭硬件加速并重启？'
               break
             case 'killed':
               message.title = '警告'
-              message.buttons = ['确定', '退出']
               message.message = '硬件加速进程被意外终止，是否关闭硬件加速并重启？'
               break
             default:
@@ -119,7 +117,7 @@ class CreateApp {
           break
       }
       dialog
-        .showMessageBox(null, {
+        .showMessageBox(null as any, {
           type: 'warning',
           title: message.title,
           buttons: message.buttons,

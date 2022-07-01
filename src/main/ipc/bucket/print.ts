@@ -1,6 +1,6 @@
 import { WebContentsPrintOptions } from 'electron'
 
-export const ipcBus = new Map<string, (event: Electron.IpcMainEvent, options: unknown) => unknown>()
+export const ipcBus = new Map<string, (event: Electron.IpcMainInvokeEvent, options: any) => any>()
 
 ipcBus.set('get-printers', event => event.sender.getPrintersAsync())
 

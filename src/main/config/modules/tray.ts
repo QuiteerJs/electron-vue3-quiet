@@ -1,12 +1,12 @@
 import { Menu, app, Tray } from 'electron'
 import { hideIcon, trayIcon } from './paths'
 import { hasWin, getWin } from '~/window/create/win.map'
-import { WinKey } from '@common/enums/window'
+import { WinKey } from '@enums/window'
 
 class TrayInit {
-  private static instance: TrayInit = null
+  private static instance: TrayInit | null = null
   tray: Tray
-  blink: NodeJS.Timeout = null
+  blink: NodeJS.Timeout | null = null
 
   static getInstance() {
     if (this.instance) return this.instance
@@ -24,10 +24,10 @@ class TrayInit {
     this.tray.on('click', () => {
       if (!hasWin(WinKey.MAIN)) return
 
-      if (getWin(WinKey.MAIN).isVisible()) {
-        getWin(WinKey.MAIN).hide()
+      if (getWin(WinKey.MAIN)?.isVisible()) {
+        getWin(WinKey.MAIN)?.hide()
       } else {
-        getWin(WinKey.MAIN).show()
+        getWin(WinKey.MAIN)?.show()
       }
     })
 

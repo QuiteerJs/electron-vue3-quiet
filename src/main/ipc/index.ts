@@ -7,12 +7,16 @@ import { ipcBus as winBus } from './bucket/window'
 import { libPath } from '~/config'
 import { Library } from 'ffi-napi'
 import { join } from 'path'
-import { ipcBus as sqlBus } from './bucket/sql'
 import { ipcBus as printBus } from './bucket/print'
 import { ipcBus as downloadBus } from './bucket/download'
 import { printInfo } from '~/config'
 
-const busCallback = (ipcBus, event, type, args) => {
+const busCallback = (
+  ipcBus: Map<string, (event: Electron.IpcMainInvokeEvent, options: any) => any>,
+  event: Electron.IpcMainInvokeEvent,
+  type: string,
+  args: any[]
+) => {
   const performFunc = ipcBus.get(type)
   if (performFunc instanceof Function) {
     return performFunc(event, args)
@@ -44,9 +48,6 @@ export function handlesInit() {
     }
   })
 
-  // 数据库操作
-  ipcMain.handle('sql-option', (event, type, args) => busCallback(sqlBus, event, type, args))
-
   // 打印
   ipcMain.handle('print-option', (event, type, args) => busCallback(printBus, event, type, args))
 
@@ -54,8 +55,8 @@ export function handlesInit() {
   ipcMain.handle('download-option', (event, type, args) => busCallback(downloadBus, event, type, args))
 
   ipcMain.handle('back-img', async event => {
-    const nativeImage = await getWin(WinKey.MAIN).capturePage()
-    return nativeImage.toDataURL()
+    const nativeImage = await getWin(WinKey.MAIN)?.capturePage()
+    return nativeImage?.toDataURL()
   })
 
   ipcMain.handle('ffi-add', async (event, a = 0, b = 0) => {
