@@ -1,4 +1,5 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vitest/config'
+import { loadEnv } from 'vite'
 import { resolveConfig, viteDefine, resolvePath, setupVitePlugins, electronEngine } from './build'
 import { resolve } from 'path'
 
@@ -18,6 +19,11 @@ export default defineConfig(configEnv => {
       brotliSize: false,
       emptyOutDir: false,
       chunkSizeWarningLimit: 2000
+    },
+    test: {
+      coverage: {
+        reporter: ['text', 'json', 'html']
+      }
     },
     server: {
       host: '0.0.0.0'
