@@ -25,8 +25,9 @@
     "postinstall": "electron-builder install-app-deps",
     "prepare": "husky install",
     "analysis": "windicss-analysis",
-		"test": "vitest",
-    "coverage": "vitest run --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:c8": "vitest run --coverage",
     "dep:upgrade": "yarn upgrade-interactive --latest"
   },
   "lint-staged": {

@@ -22,9 +22,16 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "types": ["node", "vite/client", "naive-ui/volar", "unplugin-icons/types/vue"],
+    "types": [
+      "node",
+      "vite/client",
+      "vitest",
+      "vitest/globals",
+      "naive-ui/volar",
+      "unplugin-icons/types/vue"
+    ],
     "paths": {
-      "@common/*": ["src/commom/*"],
+      "@common/*": ["src/common/*"],
       "@enums/*": ["src/enums/*"],
       "@typeorm/*": ["src/typeorm/*"],
       "~/*": ["src/main/*"],
@@ -32,14 +39,6 @@
     },
     "typeRoots": ["node_modules/@types"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "build/**/*.ts",
-    "scripts/**/*.ts",
-    "vite.config.ts"
-  ],
+  "include": ["src", "build", "scripts", "test", "vite.config.ts", "vitest.config.ts"],
   "exclude": ["node_modules"]
 }
