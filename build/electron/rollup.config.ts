@@ -16,6 +16,7 @@ import obfuscator from 'rollup-plugin-obfuscator'
 // 注入环境变量
 import replace from '@rollup/plugin-replace'
 import { defineConfig } from 'rollup'
+import { readdirSync } from 'fs'
 
 import { dependencies } from '../../package.json'
 
@@ -30,14 +31,36 @@ const transformEnv = (env: NodeJS.ProcessEnv) => {
   return envObj
 }
 
-export default (env: NodeJS.ProcessEnv) => {
+const inputOptions = () => {
+  const files: string[] = readdirSync(resolve('src/preload'))
+  return files.reduce(
+    (pre, now) => {
+      if (now === 'main')
+        return {
+          ...pre,
+          preload: resolve(`src/preload/${now}/index.ts`)
+        }
+      return {
+        ...pre,
+        [now]: resolve(`src/preload/${now}/index.ts`)
+      }
+    },
+    { main: resolve('src/main/index.ts') }
+  )
+}
+
+export default (env: NodeJS.ProcessEnv, output = resolve('dist/main.js')) => {
   return defineConfig({
-    input: resolve('src/main/index.ts'),
+    input: inputOptions(),
     output: {
-      file: resolve('dist/main.js'),
+      dir: 'dist',
       format: 'cjs',
-      name: 'MainProcess',
-      sourcemap: false
+      sourcemap: false,
+      sanitizeFileName: (fileName: string) => {
+        if (fileName === 'preload') return `preload/main`
+        if (fileName !== 'main') return `preload/${fileName}`
+        return fileName
+      }
     },
     plugins: [
       replace({
@@ -72,13 +95,9 @@ export default (env: NodeJS.ProcessEnv) => {
         define: {
           __VERSION__: '"x.y.z"'
         },
-        // Add extra loaders
         loaders: {
-          // Add .json files support
-          // require @rollup/plugin-commonjs
           '.json': 'json',
           '.ts': 'ts'
-          // Enable JSX in .js files too
         }
       }),
       env.NODE_ENV === 'production' ? obfuscator({}) : null
