@@ -2,8 +2,8 @@ interface Window {
   $ipc: {
     send: (channel: string, ...args: any) => void
     sendSync: (channel: string, ...args: any) => void
-    on: (channel: string, listener: (event: Electron.IpcRendererEvent, ...args) => void) => void
-    once: (channel: string, listener: (event: Electron.IpcRendererEvent, ...args) => void) => void
+    on: <T>(channel: string, listener: (event: Electron.IpcRendererEvent, data?: T) => void) => void
+    once: <T>(channel: string, listener: (event: Electron.IpcRendererEvent, data?: T) => void) => void
     invoke: <T, V>(channel: string, type?: string, args?: T) => Promise<V>
     removeAllListeners: (channel: string) => Electron.IpcRenderer
   }

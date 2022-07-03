@@ -1,7 +1,7 @@
 import { BrowserWindow, dialog, shell } from 'electron'
 import { addWin, delWin, onMounted, showChange, focusChange } from './win.map'
 import { WinKey } from '@enums/window'
-import { winURL, appIcon, trayIcon, preloadPath, printInfo } from '~/config/index'
+import { winURL, appIcon, trayIcon, mainPreload, printInfo } from '~/config/index'
 import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
 
 const existWins = new Map<WinKey, CreateWindow>()
@@ -20,52 +20,53 @@ export class CreateWindow {
   winKey: WinKey
 
   constructor(key: WinKey, options: Electron.BrowserWindowConstructorOptions = {}) {
-    if (existWins.has(key)) return existWins.get(key)
+    if (existWins.has(key)) {
+      existWins.get(key)
+    } else {
+      existWins.set(key, this)
 
-    existWins.set(key, this)
+      this.winKey = key
 
-    this.winKey = key
+      const { webPreferences: preferences, ...option } = options
 
-    const { webPreferences: preferences, ...option } = options
+      this.win = new BrowserWindow({
+        show: false,
+        frame: false,
+        useContentSize: true,
+        paintWhenInitiallyHidden: false,
+        ...option,
+        webPreferences: {
+          preload: mainPreload,
+          // 预加载选项
+          ...preferences,
+          // 允许跨域
+          webSecurity: false,
+          // 在macos中启用橡皮动画
+          scrollBounce: process.platform === 'darwin'
+        }
+      })
 
-    this.win = new BrowserWindow({
-      show: false,
-      frame: false,
-      useContentSize: true,
-      paintWhenInitiallyHidden: false,
-      ...option,
-      webPreferences: {
-        preload: preloadPath,
-        // 预加载选项
-        ...preferences,
-        // 允许跨域
-        webSecurity: false,
-        // 在macos中启用橡皮动画
-        scrollBounce: process.platform === 'darwin'
-      }
-    })
+      getMainEnv(env => this.win.setIcon(env.NODE_ENV ? appIcon : trayIcon))
 
-    getMainEnv(env => this.win.setIcon(env.NODE_ENV ? appIcon : trayIcon))
+      addWin(this.winKey, this.win.id)
 
-    addWin(this.winKey, this.win.id)
-
-    this.onClosed()
-    this.unresponsive()
-    this.preloadError()
-    this.handleStatus()
+      this.#onClosed()
+      this.#unresponsive()
+      this.#preloadError()
+      this.#handleStatus()
+    }
   }
 
   get webContents() {
     return this.win.webContents
   }
 
-  setTitle(title) {
+  setTitle(title = '') {
     this.win.setTitle(title)
     return this
   }
 
-  setSize(width, height, isResizable = false) {
-    ;[width, height] = [parseInt(width), parseInt(height)]
+  setSize(width: number, height: number, isResizable = false) {
     this.win.setSize(width, height)
     this.win.setMinimumSize(width, height)
     this.win.setResizable(isResizable)
@@ -134,8 +135,8 @@ export class CreateWindow {
     return this
   }
 
-  listen(eventName, callback) {
-    this.win.on(eventName, callback)
+  listen(event: any, listen: () => void) {
+    this.win.on(event, listen)
     return this
   }
 
@@ -149,7 +150,7 @@ export class CreateWindow {
   }
 
   // 窗口异常
-  private unresponsive() {
+  #unresponsive() {
     // 网页变得未响应时触发
     this.win.on('unresponsive', () => {
       printInfo('error', `网页未响应`)
@@ -169,16 +170,16 @@ export class CreateWindow {
     })
   }
 
-  // 当预加载脚本preloadPath抛出一个未处理的异常错误时触发。
-  private preloadError() {
-    this.win.webContents.on('preload-error', (event, preloadPath, err) => {
+  // 当预加载脚本mainPreload抛出一个未处理的异常错误时触发。
+  #preloadError() {
+    this.win.webContents.on('preload-error', (event, mainPreload, err) => {
       printInfo('error', `预加载脚本抛出一个未处理的异常错误 event `, event)
-      printInfo('error', `预加载脚本抛出一个未处理的异常错误 preloadPath `, preloadPath)
+      printInfo('error', `预加载脚本抛出一个未处理的异常错误 mainPreload `, mainPreload)
       printInfo('error', `预加载脚本抛出一个未处理的异常错误 err `, err)
     })
   }
 
-  private handleStatus() {
+  #handleStatus() {
     this.win.on('show', () => showChange(this.winKey, true))
 
     this.win.on('hide', () => showChange(this.winKey, false))
@@ -198,11 +199,10 @@ export class CreateWindow {
     })
   }
 
-  private onClosed() {
+  #onClosed() {
     this.win.on('closed', () => {
       existWins.delete(this.winKey)
       delWin(this.winKey)
-      this.win = null
       printInfo('info', `${this.winKey} 窗口已关闭`)
     })
   }

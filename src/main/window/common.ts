@@ -3,7 +3,6 @@ import { CreateWebView } from './create/CreateWebView'
 import { CreateWindow } from './create/CreateWindow'
 import { WinKey } from '@enums/window'
 import { app, BrowserWindow, BrowserView } from 'electron'
-import { handlesInit } from '~/ipc/index'
 
 export function createMainWindow() {
   if (hasWin(WinKey.MAIN)) return
@@ -17,7 +16,6 @@ export function createMainWindow() {
     .show()
     .unClose()
 
-  handlesInit()
   onMounted(main.winKey, async () => {
     getWin(WinKey.LOADING)?.destroy()
     // const webview = new CreateWebView(WinKey.WEBVIEW, { frame: true })

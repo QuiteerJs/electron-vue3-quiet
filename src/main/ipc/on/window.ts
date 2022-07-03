@@ -1,8 +1,8 @@
 import { BrowserWindow } from 'electron'
 
-export const ipcBus = new Map<string, (event: Electron.IpcMainInvokeEvent, state: any) => any>()
+export const ipcBus = new Map<string, (event: Electron.IpcMainEvent, state: any) => void>()
 
-const getWin = (event: Electron.IpcMainInvokeEvent) => BrowserWindow.fromWebContents(event.sender)
+const getWin = (event: Electron.IpcMainEvent) => BrowserWindow.fromWebContents(event.sender)
 
 // 销毁窗口 触发closed事件
 ipcBus.set('destroy', event => getWin(event)?.destroy())

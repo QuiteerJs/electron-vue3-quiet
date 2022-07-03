@@ -1,7 +1,7 @@
 import { BrowserWindow, BrowserView, dialog, shell, nativeImage } from 'electron'
 import { addWin, delWin, onMounted, showChange, focusChange } from './win.map'
 import { WinKey } from '@enums/window'
-import { printInfo, winURL, appIcon, trayIcon, preloadPath } from '~/config/index'
+import { printInfo, winURL, appIcon, trayIcon, mainPreload } from '~/config/index'
 import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
 import axios from 'axios'
 
@@ -31,7 +31,7 @@ export class CreateWebView {
       paintWhenInitiallyHidden: false,
       ...option,
       webPreferences: {
-        preload: preloadPath,
+        preload: mainPreload,
         // 预加载选项
         ...preferences,
         // 允许跨域
@@ -49,7 +49,7 @@ export class CreateWebView {
 
     this.view = new BrowserView({
       webPreferences: {
-        preload: preloadPath,
+        preload: mainPreload,
         // 允许跨域
         webSecurity: false,
         // 在macos中启用橡皮动画
@@ -168,11 +168,11 @@ export class CreateWebView {
     })
   }
 
-  // 当预加载脚本preloadPath抛出一个未处理的异常错误时触发。
+  // 当预加载脚本mainPreload抛出一个未处理的异常错误时触发。
   private preloadError() {
-    this.win.webContents.on('preload-error', (event, preloadPath, err) => {
+    this.win.webContents.on('preload-error', (event, mainPreload, err) => {
       printInfo('error', `预加载脚本抛出一个未处理的异常错误 event `, event)
-      printInfo('error', `预加载脚本抛出一个未处理的异常错误 preloadPath `, preloadPath)
+      printInfo('error', `预加载脚本抛出一个未处理的异常错误  `, mainPreload)
       printInfo('error', `预加载脚本抛出一个未处理的异常错误 err `, err)
     })
   }

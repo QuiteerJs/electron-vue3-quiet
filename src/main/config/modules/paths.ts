@@ -19,10 +19,12 @@ export const libPath = isDev ? join('../lib') : join('../../../lib')
 
 export const winURL = isDev ? `http://localhost:${process.env.PORT}` : `file://${join('index.html')}`
 
-export const logsPath = resolve(publicPath, '../logs')
+export const logsPath = isDev ? resolve(publicPath, '../logs') : resolve(publicPath, 'logs')
 
+// icon
 export const appIcon = resolve(publicPath, 'icon.ico')
 export const hideIcon = resolve(publicPath, 'hide.ico')
 export const trayIcon = resolve(publicPath, 'tray.ico')
 
-export const preloadPath = resolve(publicPath, 'preload.js')
+// preload
+export const mainPreload = resolve(__dirname, 'preload/main.js')

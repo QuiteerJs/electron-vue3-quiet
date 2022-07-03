@@ -57,7 +57,6 @@ export default {
 </script>
 <script lang="ts" setup>
 import IpcOnMounted from '@/components/IpcOnMounted'
-import { onMounted, ref } from 'vue'
 
 const animation = ref<HTMLDivElement>()
 let i = 1

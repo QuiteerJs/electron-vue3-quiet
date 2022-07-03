@@ -3,11 +3,23 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import '@vue/runtime-core'
 
+export {}
+
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    IconFileIcons: electron': typeof import('~icons/file-icons/electron')['default']
+    'IconFileIcons:electron': typeof import('~icons/file-icons/electron')['default']
+    IconFluent: maximize20Filled': typeof import('~icons/fluent/maximize20-filled')['default']
+    'IconFluent:maximize20Filled': typeof import('~icons/fluent/maximize20-filled')['default']
+    IconIc: baselineClose': typeof import('~icons/ic/baseline-close')['default']
+    'IconIc:baselineClose': typeof import('~icons/ic/baseline-close')['default']
+    IconIon: minusRound': typeof import('~icons/ion/minus-round')['default']
+    'IconIon:minusRound': typeof import('~icons/ion/minus-round')['default']
+    IconTwemoji: boar': typeof import('~icons/twemoji/boar')['default']
+    'IconTwemoji:boar': typeof import('~icons/twemoji/boar')['default']
+    NInput: typeof import('naive-ui')['NInput']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
-}
 
-export {}
+}
