@@ -21,29 +21,26 @@
     "build:dir": "nr typecheck && vite build && esno scripts/builder.ts dir x64",
     "clear:build": "rimraf dist && rimraf out",
     "typecheck": "vue-tsc --noEmit --skipLibCheck",
-    "lint": "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .gitignore && prettier . --write --loglevel warn --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .eslintignore && prettier . --write --loglevel warn --ignore-path .eslintignore",
     "postinstall": "electron-builder install-app-deps",
     "prepare": "husky install",
     "analysis": "windicss-analysis",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:c8": "vitest run --coverage",
-    "dep:upgrade": "yarn upgrade-interactive --latest"
-  },
-  "lint-staged": {
-    "*.{js,vue,ts,jsx,tsx}": [
-      "prettier . --write --loglevel warn --ignore-path .gitignore",
-      "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .gitignore"
-    ]
+    "dep:upgrade": "yarn upgrade-interactive --latest",
+    "commit": "git-cz"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-customizable"
+      "path": "node_modules/cz-customizable"
     }
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/eslint-parser": "^7.18.2",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@iconify/json": "^2.1.71",
     "@iconify/vue": "^3.2.1",
     "@rollup/plugin-alias": "^3.1.9",
@@ -65,6 +62,9 @@
     "c8": "^7.11.3",
     "chalk": "4.1.2",
     "colord": "^2.9.2",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.9.0",
     "dayjs": "^1.11.3",
     "dotenv": "^16.0.1",
     "electron": "^19.0.7",
