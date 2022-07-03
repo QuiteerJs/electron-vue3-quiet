@@ -36,6 +36,11 @@
       "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .gitignore"
     ]
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/eslint-parser": "^7.18.2",
