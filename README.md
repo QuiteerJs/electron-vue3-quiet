@@ -6,7 +6,7 @@
 
 > https://github.com/TaiAiAc/desk-app.git
 
-## github 地址
+## gitee 镜像仓库地址
 
 > https://gitee.com/TaiAi/desk-app.git
 
