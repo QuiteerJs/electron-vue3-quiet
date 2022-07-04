@@ -1,12 +1,13 @@
 // text,需要生成的文字
 // font，字体样式
 
-export function textToImg(text) {
+export function textToImg(text: string) {
   // 创建画布
   const canvas = document.createElement('canvas')
   // 绘制文字环境
   const context = canvas.getContext('2d')
 
+  if (!context) return
   // 画布宽度
   canvas.width = 160
   // 画布高度

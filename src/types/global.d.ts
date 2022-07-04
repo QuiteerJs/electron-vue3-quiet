@@ -7,10 +7,10 @@ interface Window {
     invoke: <T, V>(channel: string, type?: string, args?: T) => Promise<V>
     removeAllListeners: (channel: string) => Electron.IpcRenderer
   }
-  $loadingBar?: import('naive-ui').LoadingBarProviderInst
-  $dialog?: import('naive-ui').DialogProviderInst
-  $message?: import('naive-ui').MessageProviderInst
-  $notification?: import('naive-ui').NotificationProviderInst
+  $loadingBar: import('naive-ui').LoadingBarProviderInst
+  $dialog: import('naive-ui').DialogProviderInst
+  $message: import('naive-ui').MessageProviderInst
+  $notification: import('naive-ui').NotificationProviderInst
 }
 
 declare module '*.json'

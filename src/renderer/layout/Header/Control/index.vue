@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const windowOpt = type => {
+const windowOpt = (type: string) => {
   window.$ipc.send('window-option', type)
 }
 </script>

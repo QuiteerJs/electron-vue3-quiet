@@ -21,14 +21,14 @@ onUnmounted(() => {
 })
 
 async function dropHandle(e: DragEvent) {
-  if (e.dataTransfer.files.length) {
+  if (e?.dataTransfer?.files.length) {
     // 处理本地文件
     const files = e.dataTransfer.files
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
       fetchFile(file.path)
     }
-  } else if (e.dataTransfer.items.length) {
+  } else if (e.dataTransfer?.items.length) {
     // 处理网页拖拽
     for (let i = 0; i < e.dataTransfer.items.length; i++) {
       const item = e.dataTransfer.items[i]

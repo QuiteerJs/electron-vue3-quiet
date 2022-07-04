@@ -1,7 +1,7 @@
 import { BrowserWindow, Menu, MenuItem } from 'electron'
 
 class GlobalMenuShortcuts {
-  private static instance: GlobalMenuShortcuts = null
+  private static instance: GlobalMenuShortcuts
   menu: Menu
 
   static getInstance() {
@@ -42,7 +42,7 @@ class GlobalMenuShortcuts {
     })
   }
 
-  addItem(template) {
+  addItem(template: Electron.MenuItemConstructorOptions) {
     this.menu.append(new MenuItem(template))
     Menu.setApplicationMenu(this.menu)
   }

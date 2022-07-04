@@ -7,8 +7,8 @@ export function useDownload() {
   const progress = ref(0)
   const info = ref<Download.DownloadDetails>()
 
-  window.$ipc.on(eventName, (event, num) => {
-    progress.value = num
+  window.$ipc.on<number>(eventName, (event, num) => {
+    progress.value = num ?? 0
   })
 
   const start = (optsions: Download.DownloadOptions): Promise<Download.DownloadDetails> => {

@@ -1,6 +1,6 @@
 import IpcOnMounted from '@/components/IpcOnMounted'
 import { getRenderEnv } from '@/utils'
-import TestTsx from './Test/testTsx'
+import TestTsx from './testTsx'
 import { RouterLink, RouterView } from 'vue-router'
 import { useDemoStore } from '@/store'
 import { useLoadingBar, useNotification, useDialog, useMessage } from 'naive-ui'
@@ -16,19 +16,19 @@ export default defineComponent({
     const demoStore = useDemoStore()
     demoStore.actionDemo('德莫')
 
-    const testTsx = ref(null)
-    const win = ref<InstanceType<typeof IpcOnMounted>>(null)
+    const testTsx = ref<InstanceType<typeof TestTsx>>()
+    const win = ref<InstanceType<typeof IpcOnMounted>>()
 
     onMounted(async () => {
       console.log('win: ', win)
-      const status = await win.value.winStatus()
+      const status = await win.value?.winStatus()
       console.log('status :>> ', status)
-      console.log('testTsx: ', testTsx.value.msg)
+      console.log('testTsx: ', testTsx.value?.msg)
     })
 
     const slots = { default: () => '默认插槽', footer: () => '具名插槽' }
 
-    const showMsg = (str, type) => {
+    const showMsg = (str: string, type: string) => {
       window.$message.destroyAll()
       window.$message[type](str)
     }
@@ -47,8 +47,8 @@ export default defineComponent({
           // v-intersecting:show={isIntersecting => showMsg('show', 'info')}
           // v-intersecting:hide={isIntersecting => showMsg('hide', 'warning')}
           v-intersecting={{
-            show: isIntersecting => showMsg('show', 'info'),
-            hide: isIntersecting => showMsg('hide', 'warning')
+            show: () => showMsg('show', 'info'),
+            hide: () => showMsg('hide', 'warning')
           }}
           // v-intersecting={{ hide: isIntersecting => showMsg('hide', 'warning') }}
           v-text={'测试的哈斯大苏打'}

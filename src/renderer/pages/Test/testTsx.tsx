@@ -1,5 +1,4 @@
 import { withDirectives, resolveDirective } from 'vue'
-import type { Ref } from 'vue'
 
 export default defineComponent({
   setup() {
@@ -10,17 +9,24 @@ export default defineComponent({
   },
   expose: ['msg'],
   render() {
+    const el = <h1 style={{ maxWidth: '250px' }}>{`<div v-[①]:[③].[{④}]="②"></div>`}</h1>
+    const slot = this.$slots.default && this.$slots.default()
+    const footerSlot = this.$slots.footer && this.$slots.footer()
     return (
       <div>
         {this.msg}
-        {withDirectives(<h1 style={{ maxWidth: '250px' }}>{`<div v-[①]:[③].[{④}]="②"></div>`}</h1>, [
-          [resolveDirective('demo'), () => 1, 'value', { suffix: true }],
-          [resolveDirective('ellipsis'), 1]
+        {withDirectives(el, [
+          [resolveDirective('demo')!, () => 1, 'value', { suffix: true }],
+          [resolveDirective('ellipsis')!, 1]
         ])}
-        {/* <div><slot /></div> */}
-        <div>{this.$slots.default()}</div>
-        {/* <div><slot name="footer" :text="message" /></div> */}
-        <div>{this.$slots.footer({ text: this.message })}</div>
+        <div>
+          <slot />
+        </div>
+        <div>
+          <slot name="footer" text={this.msg} />
+        </div>
+        <div>{slot}</div>
+        <div>{footerSlot}</div>
       </div>
     )
   }

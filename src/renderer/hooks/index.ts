@@ -1,5 +1,3 @@
-export * from './modules/useApi'
 export * from './modules/useDownload'
-export * from './modules/useEventBus'
 export * from './modules/useMainResize'
 export * from './modules/useCustomEvent'

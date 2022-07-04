@@ -1,7 +1,7 @@
 import { onUnmounted } from 'vue'
 
 export function useCustomEvent() {
-  const initiate = <T>(eventName: string, options: T = null) => {
+  const initiate = <T>(eventName: string, options: T) => {
     dispatchEvent(new CustomEvent(eventName, { detail: options }))
   }
 
@@ -10,10 +10,10 @@ export function useCustomEvent() {
       callback(event?.detail ?? event)
     }
 
-    addEventListener(eventName, listener)
+    addEventListener(eventName as any, listener)
 
     onUnmounted(() => {
-      removeEventListener(eventName, listener)
+      removeEventListener(eventName as any, listener)
     })
   }
 

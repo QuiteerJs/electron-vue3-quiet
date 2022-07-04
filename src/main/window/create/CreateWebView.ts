@@ -100,13 +100,12 @@ export class CreateWebView {
     return this.view.webContents
   }
 
-  loadURL(url) {
+  loadURL(url = '') {
     this.view.webContents.loadURL(url)
     return this
   }
 
-  setSize(width, height, isResizable = false) {
-    ;[width, height] = [parseInt(width), parseInt(height)]
+  setSize(width: number, height: number, isResizable = false) {
     this.win.setSize(width, height)
     this.win.setMinimumSize(width, height)
     this.win.setResizable(isResizable)
@@ -133,8 +132,8 @@ export class CreateWebView {
     return this
   }
 
-  listen(eventName, callback) {
-    this.win.on(eventName, callback)
+  listen(eventName: string, callback: () => void) {
+    this.win.on(eventName as any, callback)
     return this
   }
 
@@ -200,7 +199,6 @@ export class CreateWebView {
   private onClosed() {
     this.win.on('closed', () => {
       delWin(this.winKey)
-      this.win = null
       printInfo('info', `${this.winKey} 窗口已关闭`)
     })
   }

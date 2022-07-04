@@ -1,6 +1,6 @@
 <template>
   <div class="menu" :class="active ? '!bg-[#DDDFE2]' : ''" @click="checkRoute">
-    <Icon :icon="route.meta.icon" class="text-24px" />
+    <Icon :icon="route.meta?.icon" class="text-24px" />
   </div>
 </template>
 <script setup lang="ts">

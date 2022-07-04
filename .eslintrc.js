@@ -31,6 +31,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/no-extra-semi': 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
     'prettier/prettier': [
       2,
       {

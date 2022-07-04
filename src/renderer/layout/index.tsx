@@ -3,7 +3,6 @@ import { Content } from './Content'
 import { Sidebar } from './Sidebar'
 import { Header } from './Header'
 import { testApi } from '@/api'
-import { useApi } from '@/hooks'
 
 export default defineComponent({
   name: 'Layout',
@@ -13,7 +12,6 @@ export default defineComponent({
     onMounted(async () => {
       const status = await win.value?.winStatus()
       console.log('status :>> ', status)
-      const { loading, error, result, fetchResource } = useApi<Test.api>(testApi)
     })
 
     console.log('import.meta.env: ', import.meta.env)

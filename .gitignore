@@ -8,3 +8,5 @@ dist
 out
 *.local
 stats.html
+components.d.ts
+auto-imports.d.ts

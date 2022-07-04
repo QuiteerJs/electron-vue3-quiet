@@ -1,12 +1,14 @@
 export class ImageTools {
   static toBase64(localPath: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      let img: HTMLImageElement = new Image()
+      let img: HTMLImageElement | null = new Image()
       if (img) {
         img.src = localPath
         img.onload = () => {
-          let canvas: HTMLCanvasElement = document.createElement('canvas')
-          const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
+          let canvas: HTMLCanvasElement | null = document.createElement('canvas')
+          const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d')
+
+          if (!ctx || !img) return
 
           canvas.width = img.width
           canvas.height = img.height
@@ -24,7 +26,7 @@ export class ImageTools {
     })
   }
 
-  static Base64toFile(base64, filename): File {
+  static Base64toFile(base64: string, filename: string): File {
     if (!base64.startsWith('data:')) return new File([], filename)
 
     const [, str] = base64.split(',')

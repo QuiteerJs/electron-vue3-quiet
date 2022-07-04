@@ -11,7 +11,7 @@ export default defineComponent({
   setup(props, { attrs, emit, expose, slots }) {
     const { cardList } = props
 
-    const openNewWindow = item => {
+    const openNewWindow = (item: Component.CardState) => {
       window.$ipc.send('main-open', toRaw(item))
     }
 

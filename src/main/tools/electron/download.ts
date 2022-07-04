@@ -40,7 +40,7 @@ export class Downloader {
    * @param {any} progress=0
    * @returns {any}
    */
-  private statusChange(state, message, progress = 0) {
+  private statusChange(state: any, message: string, progress = 0) {
     this.status = {
       state,
       isSuccess: state === 'completed',
@@ -55,7 +55,7 @@ export class Downloader {
    * @param {any} status
    * @returns {any}
    */
-  private getDtails(status) {
+  private getDtails(status: any) {
     return {
       ...status,
       time: this.getTime(),
@@ -71,7 +71,7 @@ export class Downloader {
    * @returns {any}
    */
   private getTime() {
-    const int = (n): number => parseInt(n)
+    const int = (n: number): number => parseInt(n + '')
     const pad = (n: number): string => n.toString().padStart(2, '0')
 
     const start = this.item.getStartTime() * 1000
@@ -97,12 +97,12 @@ export class Downloader {
         if (this.options.isShowSaveDialog) {
           item.setSaveDialogOptions({ title: '请选择文件下载路径' })
         } else {
-          const filePath = join(this.options.savePath, this.options.filename)
+          const filePath = join(this.options.savePath as string, this.options.filename)
           item.setSavePath(filePath)
         }
 
         this.downloadItem = item
-        downloadItemMap.set(this.options.eventKey, item)
+        downloadItemMap.set(this.options.eventKey as string, item)
 
         await this.hanleStatus()
 
@@ -150,14 +150,14 @@ export class Downloader {
           switch (state) {
             case 'completed':
               this.statusChange(state, '下载成功')
-              downloadItemMap.delete(this.options.eventKey)
+              downloadItemMap.delete(this.options.eventKey as string)
               break
             case 'cancelled':
               this.statusChange(state, '下载取消')
               break
             case 'interrupted':
               this.statusChange(state, '下载中断，无法恢复')
-              downloadItemMap.delete(this.options.eventKey)
+              downloadItemMap.delete(this.options.eventKey as string)
               break
           }
           resolve(this.status)

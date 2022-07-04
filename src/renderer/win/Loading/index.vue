@@ -64,7 +64,7 @@ onMounted(() => {
   const show = () => {
     if (i < 100) {
       setTimeout(() => {
-        animation.value.style.opacity = String(i / 100)
+        animation.value && (animation.value.style.opacity = String(i / 100))
         i += 2
         show()
       }, 50)

@@ -4,19 +4,17 @@ interface MyEvent<Data> extends Event {
 
 export class CreateEvent<Args> {
   private eventName: string
-  private listener: EventListenerOrEventListenerObject
-  private callback: (...args) => void
-  private args: Args = null
+  private listener: (event: MyEvent<Args>) => void
+  private callback: (...args: any[]) => void
 
-  constructor(eventName: string, callback?: (...args) => void) {
+  constructor(eventName: string, callback?: () => void) {
     this.eventName = eventName
-    this.callback = callback
+    callback && (this.callback = callback)
   }
 
   dispatch(args?: Args) {
     if (!this.eventName) return
 
-    this.args = args
     const event = args ? new CustomEvent(this.eventName, { detail: args }) : new Event(this.eventName)
 
     window.dispatchEvent(event)
@@ -27,10 +25,10 @@ export class CreateEvent<Args> {
       this.callback(event?.detail ?? event)
     }
 
-    window.addEventListener(this.eventName, this.listener)
+    window.addEventListener(this.eventName as any, this.listener)
   }
 
   destroy() {
-    window.removeEventListener(this.eventName, this.listener)
+    window.removeEventListener(this.eventName as any, this.listener)
   }
 }
