@@ -2,6 +2,11 @@
 
 > 这是一个基于 electron 的 vue3 的模板，使用当下最新的技术栈.
 
+# 地址
+
+> github : https://github.com/TaiAiAc/desk-app.git
+> gitee : https://gitee.com/TaiAi/desk-app.git
+
 ## 技术栈关键字
 
 - typesctript
