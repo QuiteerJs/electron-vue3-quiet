@@ -71,8 +71,7 @@ export default (env: NodeJS.ProcessEnv, output = resolve('dist/main.js')) => {
         entries: [
           { find: '~', replacement: resolve('src/main') },
           { find: '@common', replacement: resolve('src/common') },
-          { find: '@enums', replacement: resolve('src/enums') },
-          { find: '@typeorm', replacement: resolve('src/typeorm') }
+          { find: '@enums', replacement: resolve('src/enums') }
         ]
       }),
       commonjs({

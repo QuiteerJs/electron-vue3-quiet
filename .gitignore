@@ -10,3 +10,4 @@ out
 stats.html
 components.d.ts
 auto-imports.d.ts
+database.sqlite

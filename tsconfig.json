@@ -32,7 +32,6 @@
     "paths": {
       "@common/*": ["src/common/*"],
       "@enums/*": ["src/enums/*"],
-      "@typeorm/*": ["src/typeorm/*"],
       "~/*": ["src/main/*"],
       "@/*": ["src/renderer/*"]
     },

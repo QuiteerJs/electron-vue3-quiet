@@ -7,6 +7,7 @@ import { Library } from 'ffi-napi'
 import { join } from 'path'
 import { ipcBus as printBus } from '../bucket/print'
 import { ipcBus as downloadBus } from '../bucket/download'
+import { ipcBus as sqlBus } from '../bucket/sql'
 import { printInfo } from '~/config'
 
 const busCallback = (
@@ -37,6 +38,9 @@ export function initHandleIpc() {
 
   // 下载
   ipcMain.handle('download-option', (event, type, args) => busCallback(downloadBus, event, type, args))
+
+  // sql
+  ipcMain.handle('sql-option', (event, type, args) => busCallback(sqlBus, event, type, args))
 
   ipcMain.handle('back-img', async event => {
     const nativeImage = await getWin(WinKey.MAIN)?.capturePage()
