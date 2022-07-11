@@ -16,17 +16,16 @@ export default {
 </script>
 <script setup lang="ts">
 import IpcOnMounted from '@/components/IpcOnMounted'
+import type { DataTableColumn } from 'naive-ui'
 
-const columns = ref([
+const columns = ref<DataTableColumn<Sql.UserEntity>[]>([
   { title: 'id', key: 'id' },
   { title: 'name', key: 'name' },
-  { title: 'sex', key: 'sex', render: (row: Sql.UserEntity) => String(row.sex) },
+  { title: 'sex', key: 'sex', render: row => String(row.sex) },
   { title: 'age', key: 'age' }
 ])
 
 const data = ref<Sql.UserEntity[]>([])
-
-const isAdd = ref(false)
 
 const search = async () => {
   const res = await window.$ipc.invoke<unknown, Sql.UserEntity[]>('sql-option', 'user-search-all')
