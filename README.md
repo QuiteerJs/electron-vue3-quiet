@@ -10,6 +10,10 @@
 
 > https://gitee.com/TaiAi/electron-vue3-quiet.git
 
+## 文档地址
+
+> https://www.wolai.com/3hD6e4iUkRaRmezu3Ds3Dd
+
 ## 技术栈关键字
 
 - typesctript
@@ -54,6 +58,4 @@ nr dev
 nr build
 ```
 
-- 项目文档
 
-> https://www.wolai.com/3hD6e4iUkRaRmezu3Ds3Dd
