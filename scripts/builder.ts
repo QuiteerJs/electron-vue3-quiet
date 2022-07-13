@@ -6,10 +6,10 @@ const [, , ...args] = process.argv
 
 const config: Configuration = {
   asar: false,
-  appId: 'org.TaiAi.desk-app',
-  productName: 'desk-app',
+  appId: 'org.TaiAi.electron-vue3-quiet',
+  productName: 'electron-vue3-quiet',
   protocols: {
-    name: 'desk-app',
+    name: 'electron-vue3-quiet',
     schemes: ['deeplink']
   },
   nsis: {

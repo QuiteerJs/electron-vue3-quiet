@@ -1,14 +1,14 @@
-# desk-app
+# electron-vue3-quiet
 
 > 这是一个基于 electron 的 vue3 的模板，使用当下最新的技术栈.
 
 ## github 地址
 
-> https://github.com/TaiAiAc/desk-app.git
+> https://github.com/TaiAiAc/electron-vue3-quiet.git
 
 ## gitee 镜像仓库地址
 
-> https://gitee.com/TaiAi/desk-app.git
+> https://gitee.com/TaiAi/electron-vue3-quiet.git
 
 ## 技术栈关键字
 
@@ -29,13 +29,13 @@
 - 获取项目代码
 
 ```bash
-git clone https://gitee.com/TaiAi/desk-app.git
+git clone https://gitee.com/TaiAi/electron-vue3-quiet.git
 ```
 
 - 安装依赖
 
 ```bash
-cd desk-app
+cd electron-vue3-quiet
 
 npm i -g @antfu/ni
 

@@ -39,7 +39,7 @@ class CreateApp {
 
   private init() {
     getMainEnv(env => {
-      app.setName(env.NODE_ENV ? 'desk-dev-app' : 'desk-app')
+      app.setName(env.NODE_ENV ? 'dev-electron-vue3-quiet' : 'electron-vue3-quiet')
     })
 
     // console.log('app.requestSingleInstanceLock(): ', app.requestSingleInstanceLock())

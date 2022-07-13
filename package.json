@@ -1,5 +1,5 @@
 {
-  "name": "desk-app",
+  "name": "electron-vue3-quiet",
   "version": "0.0.0",
   "description": "桌面端脚手架",
   "main": "./dist/main.js",
@@ -7,12 +7,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TaiAiAc/desk-app.git"
+    "url": "git+https://github.com/TaiAiAc/electron-vue3-quiet.git"
   },
   "bugs": {
-    "url": "https://github.com/TaiAiAc/desk-app/issues"
+    "url": "https://github.com/TaiAiAc/electron-vue3-quiet/issues"
   },
-  "homepage": "https://github.com/TaiAiAc/desk-app#readme",
+  "homepage": "https://github.com/TaiAiAc/electron-vue3-quiet#readme",
   "scripts": {
     "dev": "vite",
     "build:win64": "nr typecheck && vite build && esno scripts/builder.ts x64",
