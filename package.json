@@ -29,7 +29,8 @@
     "test:watch": "vitest",
     "test:c8": "vitest run --coverage",
     "dep:upgrade": "yarn upgrade-interactive --latest",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "commit-push":"git pull && git add . && git-cz && git push"
   },
   "config": {
     "commitizen": {
