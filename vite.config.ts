@@ -15,7 +15,7 @@ export default defineConfig(configEnv => {
       outDir: resolve(root, 'dist'),
       target: 'esnext',
       minify: 'esbuild',
-      brotliSize: false,
+      reportCompressedSize: false,
       emptyOutDir: false,
       chunkSizeWarningLimit: 2000
     },

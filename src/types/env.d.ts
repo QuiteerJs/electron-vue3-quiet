@@ -17,6 +17,11 @@ declare interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 
+/** import.meta.glob */
+declare interface ImportMetaGlob<T> {
+  readonly default: T
+}
+
 /** 通过vite注入的全局变量 */
 declare const PROJECT_BUILD_TIME: string
 

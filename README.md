@@ -57,5 +57,3 @@ nr dev
 ```bash
 nr build
 ```
-
-
