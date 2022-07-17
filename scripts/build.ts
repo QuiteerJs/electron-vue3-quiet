@@ -17,7 +17,7 @@ const run = async () => {
       {
         type: 'checkbox',
         name: 'pattern',
-        message: '请选择构建模式 , 默认`x64` ~',
+        message: '请选择构建模式 , 默认为当前操作系统平台 ~',
         choices: [
           { name: 'x64', value: 'x64' },
           { name: 'ia32', value: 'ia32' },
