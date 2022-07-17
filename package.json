@@ -15,10 +15,7 @@
   "homepage": "https://github.com/TaiAiAc/electron-vue3-quiet#readme",
   "scripts": {
     "dev": "vite",
-    "build:win64": "nr typecheck && vite build && esno scripts/builder.ts x64",
-    "build:win32": "nr typecheck && vite build && esno scripts/builder.ts ia32",
-    "build:mac": "nr typecheck && vite build && esno scripts/builder.ts arm64",
-    "build:dir": "nr typecheck && vite build && esno scripts/builder.ts dir x64",
+    "build": "esno scripts/build.ts",
     "clear:build": "rimraf dist && rimraf out",
     "typecheck": "vue-tsc --noEmit --skipLibCheck",
     "lint": "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .eslintignore && prettier . --write --loglevel warn --ignore-path .eslintignore",
@@ -50,6 +47,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-replace": "^4.0.0",
     "@types/ffi-napi": "^4.0.5",
+    "@types/inquirer": "^8.2.1",
     "@types/sqlite3": "^3.1.8",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
@@ -81,6 +79,7 @@
     "follow-redirects": "^1.15.1",
     "fs-extra": "^10.1.0",
     "husky": "^8.0.1",
+    "inquirer": "^9.0.1",
     "javascript-obfuscator": "^4.0.0",
     "lint-staged": "^13.0.1",
     "naive-ui": "^2.31.0",
@@ -109,7 +108,8 @@
     "vue-router": "^4.1.2",
     "vue-tsc": "^0.38.5",
     "windicss": "^3.5.4",
-    "windicss-analysis": "^0.3.5"
+    "windicss-analysis": "^0.3.5",
+    "zx": "^7.0.7"
   },
   "dependencies": {
     "axios": "^0.27.2",

@@ -2,8 +2,6 @@ import { build } from 'electron-builder'
 import type { CliOptions, Configuration } from 'electron-builder'
 import chalk from 'chalk'
 
-const [, , ...args] = process.argv
-
 const config: Configuration = {
   asar: false,
   appId: 'org.TaiAi.electron-vue3-quiet',
@@ -69,15 +67,30 @@ const timeKey = `\n${okayLog}本次 build 用时为`
 console.time(timeKey)
 const rawOptions: CliOptions = { config }
 
-args.forEach(key => (rawOptions[key] = true))
+export const runElectronBuilder = async (archs: string[]) => {
+  console.log('archs: ', archs)
+  const setArch = (options: string[]) => options.forEach(key => (rawOptions[key] = true))
 
-build(rawOptions)
-  .then(_ => {
-    console.log(`\n${doneLog + args.at(-1) + '安装包打包完成'}`)
-    console.timeEnd(timeKey)
-    console.log('\n')
-  })
-  .catch(error => {
-    console.log(`\n\n${errorLog + error}`)
-    process.exit(1)
-  })
+  if (archs.length) {
+    let list: string[] = []
+
+    archs.forEach(item => {
+      const arr = item.split(',')
+      list = [...list, ...arr]
+    })
+    setArch(list)
+  } else {
+    setArch([process.arch])
+  }
+
+  build(rawOptions)
+    .then(_ => {
+      console.log(`\n${doneLog}${archs.length ? archs.toString() : process.arch}安装包打包完成`)
+      console.timeEnd(timeKey)
+      console.log('\n')
+    })
+    .catch(error => {
+      console.log(`\n\n${errorLog + error}`)
+      process.exit(1)
+    })
+}
