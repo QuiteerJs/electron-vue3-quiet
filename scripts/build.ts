@@ -23,7 +23,7 @@ const run = async () => {
           { name: 'ia32', value: 'ia32' },
           { name: 'dir:x64', value: 'dir,x64' },
           { name: 'dir:ia32', value: 'dir,ia32' },
-          { name: 'arm64', value: 'arm64', disabled: process.platform !== 'win32' }
+          { name: 'arm64', value: 'arm64', disabled: process.platform !== 'darwin' }
         ]
       }
     ])
