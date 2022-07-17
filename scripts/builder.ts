@@ -67,21 +67,16 @@ const timeKey = `\n${okayLog}本次 build 用时为`
 console.time(timeKey)
 const rawOptions: CliOptions = { config }
 
-export const runElectronBuilder = async (archs: string[]) => {
-  console.log('archs: ', archs)
+export const runElectronBuilder = async (archs: string[], isCreateExe: boolean) => {
   const setArch = (options: string[]) => options.forEach(key => (rawOptions[key] = true))
 
   if (archs.length) {
-    let list: string[] = []
-
-    archs.forEach(item => {
-      const arr = item.split(',')
-      list = [...list, ...arr]
-    })
-    setArch(list)
+    setArch(archs)
   } else {
     setArch([process.arch])
   }
+
+  if (!isCreateExe) setArch(['dir'])
 
   build(rawOptions)
     .then(_ => {

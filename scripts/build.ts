@@ -6,11 +6,23 @@ const run = async () => {
   await $`rimraf dist && rimraf out`
 
   const { isTypecheck } = await inquirer
-    .prompt([{ type: 'confirm', name: 'isTypecheck', message: '是否执行ts类型检查 ?' }])
+    .prompt([{ type: 'confirm', name: 'isTypecheck', message: '是否执行ts类型检查?' }])
     .catch(err => {
       console.log('err: ', err)
       process.exit(1)
     })
+
+  const { isCreateExe } = await inquirer
+    .prompt([{ type: 'confirm', name: 'isCreateExe', message: '是否生成安装包?' }])
+    .catch(err => {
+      console.log('err: ', err)
+      process.exit(1)
+    })
+
+  const isMac = process.platform === 'darwin'
+  const isLiunx = process.platform === 'linux'
+  const isWin32 = process.arch === 'ia32'
+  const isWin64 = process.arch === 'x64'
 
   const { pattern } = await inquirer
     .prompt([
@@ -18,12 +30,21 @@ const run = async () => {
         type: 'checkbox',
         name: 'pattern',
         message: '请选择构建模式 , 默认为当前操作系统平台 ~',
+        pageSize: 10,
         choices: [
-          { name: 'x64', value: 'x64' },
-          { name: 'ia32', value: 'ia32' },
-          { name: 'dir:x64', value: 'dir,x64' },
-          { name: 'dir:ia32', value: 'dir,ia32' },
-          { name: 'arm64', value: 'arm64', disabled: process.platform !== 'darwin' }
+          { name: 'win64', value: 'x64', disabled: !(isWin64 || isMac) },
+          { name: 'win32', value: 'ia32', disabled: !(isWin64 || isWin32 || isMac) },
+          { name: 'mac', value: 'arm64', disabled: !isMac },
+          {
+            name: 'linux',
+            value: 'armv7l',
+            disabled: !(isLiunx || isMac)
+          },
+          {
+            name: 'all',
+            value: 'universal',
+            disabled: !isMac
+          }
         ]
       }
     ])
@@ -38,7 +59,7 @@ const run = async () => {
 
   await $`vite build`
 
-  runElectronBuilder(pattern)
+  runElectronBuilder(pattern, isCreateExe)
 }
 
 run()
