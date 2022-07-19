@@ -3,6 +3,7 @@ import { addWin, hasWin, delWin, getWin, onMounted } from '~/window/create/win.m
 import { WinKey } from '@enums/window'
 import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
 import { printInfo } from './log'
+import { version, name } from '../../../../package.json'
 
 class CreateApp {
   private static _instance: CreateApp | null = null
@@ -39,7 +40,7 @@ class CreateApp {
 
   private init() {
     getMainEnv(env => {
-      app.setName(env.NODE_ENV ? 'dev-electron-vue3-quiet' : 'electron-vue3-quiet')
+      app.setName(env.NODE_ENV ? `dev-${name}` : name)
     })
 
     // console.log('app.requestSingleInstanceLock(): ', app.requestSingleInstanceLock())
