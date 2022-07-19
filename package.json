@@ -15,7 +15,9 @@
   "homepage": "https://github.com/TaiAiAc/electron-vue3-quiet#readme",
   "scripts": {
     "dev": "vite",
-    "build": "esno scripts/build.ts",
+    "dev:zx": "esno scripts/dev.ts",
+    "build": "vite build && esno scripts/builder.ts --win --x64",
+    "build:zx": "esno scripts/build.ts",
     "clear:build": "rimraf dist && rimraf out",
     "typecheck": "vue-tsc --noEmit --skipLibCheck",
     "lint": "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .eslintignore && prettier . --write --loglevel warn --ignore-path .eslintignore",

@@ -1,13 +1,15 @@
 import { build } from 'electron-builder'
 import type { CliOptions, Configuration } from 'electron-builder'
-import chalk from 'chalk'
+import { version, name } from '../package.json'
+import { colorLog } from './patternLog'
+const { doneLog, errorLog, okayLog, timeKey } = colorLog('electron-builder')
 
 const config: Configuration = {
   asar: false,
   appId: 'org.TaiAi.electron-vue3-quiet',
-  productName: 'electron-vue3-quiet',
+  productName: name,
   protocols: {
-    name: 'electron-vue3-quiet',
+    name: name,
     schemes: ['deeplink']
   },
   nsis: {
@@ -18,7 +20,8 @@ const config: Configuration = {
     allowToChangeInstallationDirectory: true,
     runAfterFinish: true,
     createDesktopShortcut: true,
-    createStartMenuShortcut: true
+    createStartMenuShortcut: true,
+    artifactName: name + ' ${arch} Setup ' + version + '.${ext}'
   },
   files: ['dist/**/*'],
   extraFiles: ['lib'],
@@ -59,15 +62,11 @@ const config: Configuration = {
   }
 }
 
-const logo = '  electron-builder  '
-const doneLog = chalk.bgGreen.white(logo) + ' '
-const errorLog = chalk.bgRed.white(logo) + ' '
-const okayLog = chalk.bgBlue.white(logo) + ' '
-const timeKey = `\n${okayLog}本次 build 用时为`
-console.time(timeKey)
+console.time(timeKey('build'))
 const rawOptions: CliOptions = { config }
 
 export const runElectronBuilder = async (archs: string[], isCreateExe: boolean) => {
+  okayLog('输出可执行程序')
   const setArch = (options: string[]) => options.forEach(key => (rawOptions[key] = true))
 
   if (archs.length) {
@@ -80,12 +79,11 @@ export const runElectronBuilder = async (archs: string[], isCreateExe: boolean) 
 
   build(rawOptions)
     .then(_ => {
-      console.log(`\n${doneLog}${archs.length ? archs.toString() : process.arch}安装包打包完成`)
-      console.timeEnd(timeKey)
-      console.log('\n')
+      doneLog(`${archs.length ? archs.toString() : process.arch}安装包打包完成`)
+      console.timeEnd(timeKey('build'))
     })
     .catch(error => {
-      console.log(`\n\n${errorLog + error}`)
+      errorLog(error)
       process.exit(1)
     })
 }
