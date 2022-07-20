@@ -1,5 +1,5 @@
 import { ipcMain, BrowserWindow } from 'electron'
-import { winMap, getWin, winRead } from '~/window/create/win.map'
+import { hasWin, getWin, winRead } from '~/window/create/win.map'
 import { CreateWindow } from '~/window/create/CreateWindow'
 import { ipcBus as winBus } from './window'
 
@@ -26,6 +26,8 @@ export function initOnIpc() {
   ipcMain.on('window-option', (event, type, args) => busCallback(winBus, event, type, args))
 
   ipcMain.on('main-open', (event, state: Component.CardState) => {
+    if (hasWin(state.key)) return getWin(state.key)?.show()
+
     const win = new CreateWindow(state.key, { frame: true })
     win.loadURL(state.path).setTitle(state.title).setSize(660, 480, true).show().unClose()
   })
