@@ -11,10 +11,8 @@ export default defineComponent({
 
     onMounted(async () => {
       const status = await win.value?.winStatus()
-      console.log('status :>> ', status)
+      // console.log('status :>> ', status)
     })
-
-    console.log('import.meta.env: ', import.meta.env)
 
     return () => (
       <>

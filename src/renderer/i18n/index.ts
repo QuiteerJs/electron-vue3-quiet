@@ -21,7 +21,6 @@ const messages = Object.values(modules).reduce(
   },
   { en: {}, zh: {} }
 )
-console.log('messages: ', messages)
 
 export default createI18n({
   // 使用 Composition API 模式，则需要将其设置为false

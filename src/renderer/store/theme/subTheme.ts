@@ -1,7 +1,6 @@
 import { watch, onUnmounted } from 'vue'
 import { useOsTheme } from 'naive-ui'
 import type { GlobalThemeOverrides } from 'naive-ui'
-import { useElementSize } from '@vueuse/core'
 import { kebabCase } from 'lodash-es'
 import { useThemeStore } from './index'
 

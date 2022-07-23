@@ -1,5 +1,5 @@
 <template>
-  <div class="menu" :class="active ? '!bg-[#DDDFE2]' : ''" @click="checkRoute">
+  <div class="menu" :class="active ? '!bg-[#DDDFE2]' : 'bg-[#1A1D25]'" @click="checkRoute">
     <Icon :icon="route.meta?.icon" class="text-24px" />
   </div>
 </template>
@@ -16,12 +16,12 @@ const checkRoute = () => {
   router.push(`/home/${String(route.name)}`)
 }
 
-console.log('route: ', route)
-console.log('routes: ', routes)
-console.log('router: ', router)
+// console.log('route: ', route)
+// console.log('routes: ', routes)
+// console.log('router: ', router)
 </script>
 <style scoped>
 .menu {
-  @apply w-38px h-38px rounded flex justify-center items-center bg-[#1A1D25] m-auto mt-10px;
+  @apply w-38px h-38px rounded flex justify-center items-center m-auto mt-10px;
 }
 </style>

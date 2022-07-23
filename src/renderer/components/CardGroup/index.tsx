@@ -22,7 +22,7 @@ export default defineComponent({
             <n-card
               hoverable
               title={item.title}
-              class="!w-216px cursor-pointer mr-14px mb-14px"
+              class="!w-210px cursor-pointer mr-14px mb-14px"
               onClick={() => openNewWindow(item)}
             >
               {item.content}

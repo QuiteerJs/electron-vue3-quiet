@@ -12,7 +12,7 @@ const [{ children: routes }] = router.options.routes.filter(route => route.name 
 <style scoped>
 .content {
   height: calc(100vh - 3.5rem);
-  @apply bg-[#14181D] w-60px overflow-x-auto pb-20px;
+  @apply bg-[#14181D] w-60px min-w-60px overflow-x-auto pb-20px;
 }
 
 /*滚动条里面轨道*/
