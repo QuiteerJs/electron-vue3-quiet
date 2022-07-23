@@ -22,9 +22,9 @@ export const winURL = isDev ? `http://localhost:${process.env.PORT}` : `file://$
 export const logsPath = isDev ? resolve(publicPath, '../logs') : resolve(publicPath, 'logs')
 
 // icon
-export const appIcon = resolve(publicPath, 'icon.ico')
-export const hideIcon = resolve(publicPath, 'hide.ico')
-export const trayIcon = resolve(publicPath, 'tray.ico')
+export const appIcon = resolve(publicPath, 'icon.png')
+export const hideIcon = resolve(publicPath, 'hide.png')
+export const trayIcon = resolve(publicPath, 'tray.png')
 
 // preload
 export const mainPreload = resolve(__dirname, 'preload/main.js')
