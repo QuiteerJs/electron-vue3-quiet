@@ -2,8 +2,6 @@ import { defineConfig } from 'vite'
 import { resolveConfig, viteDefine, resolvePath, setupVitePlugins } from '../build'
 import { resolve } from 'path'
 
-console.log('-----------使用zx命令行启动-------------')
-
 export default defineConfig(configEnv => {
   const { root, renderer } = resolvePath('../', import.meta.url)
 

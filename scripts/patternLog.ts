@@ -1,5 +1,11 @@
 import { chalk } from 'zx'
 
+interface LogInfo {
+  name: string
+  info: string
+  timeKey: string
+}
+
 export function colorLog(name: string) {
   const logo = `  ${name}  `
   const doneLog = (info: string) => console.log('\n' + chalk.bgGreen.white(logo) + ' ' + info)
@@ -17,4 +23,15 @@ export function colorLog(name: string) {
     okayLog,
     timeKey
   }
+}
+
+export async function runnerLog(promiseCli: () => Promise<unknown>, logInfo: LogInfo) {
+  const loger = colorLog(logInfo.name)
+  console.time(loger.timeKey(logInfo.timeKey))
+  await promiseCli().catch(error => {
+    loger.errorLog(JSON.stringify(error))
+    process.exit(1)
+  })
+  loger.doneLog(logInfo.info)
+  console.timeEnd(loger.timeKey(logInfo.timeKey))
 }

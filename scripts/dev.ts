@@ -1,23 +1,18 @@
-import 'zx/globals'
+import { $, path } from 'zx'
 import { config as getEnv } from 'dotenv'
 import { getPortPromise } from 'portfinder'
 
-async function dev() {
+async function devCli() {
   const { parsed: devEnv } = getEnv({ path: path.resolve(process.cwd(), '.env') })
   const port = await getPortPromise({
     port: Number(devEnv?.VITE_BASE_PROT)
   })
 
-  const viteProcess = $`vite --config scripts/vite.config.ts  --port ${port}`
-  const rollupProcess = $`esno scripts/watch.ts ${port}`
+  $`vite --config scripts/vite.config.ts  --port ${port}`
 
-  viteProcess?.child?.on('close', () => {
-    process.exit()
-  })
+  await $`esno scripts/watch.ts ${port}`
 
-  rollupProcess?.child?.on('close', () => {
-    process.exit()
-  })
+  process.exit()
 }
 
-dev()
+devCli()

@@ -50,7 +50,9 @@ const inputOptions = () => {
   )
 }
 
-export default (env: NodeJS.ProcessEnv) => {
+export default (env: NodeJS.ProcessEnv, isClearness?: boolean) => {
+  const isPord = env.NODE_ENV === 'production'
+
   return defineConfig({
     input: inputOptions(),
     output: {
@@ -89,7 +91,7 @@ export default (env: NodeJS.ProcessEnv) => {
         exclude: /node_modules/,
         // watch: process.argv.includes('--watch'), // rollup 中有配置
         sourceMap: false, // default
-        minify: env.NODE_ENV === 'production',
+        minify: isClearness ? false : isPord,
         target: 'esnext', // default, or 'es20XX', 'esnext'
         // Like @rollup/plugin-replace
         define: {
@@ -100,7 +102,7 @@ export default (env: NodeJS.ProcessEnv) => {
           '.ts': 'ts'
         }
       }),
-      env.NODE_ENV === 'production' ? obfuscator({}) : null
+      isPord && !isClearness ? obfuscator({}) : null
     ],
     external: [...builtinModules, ...Object.keys(dependencies), 'electron']
   })

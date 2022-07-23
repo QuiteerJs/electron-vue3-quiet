@@ -1,8 +1,11 @@
-import { build } from 'electron-builder'
 import type { CliOptions, Configuration } from 'electron-builder'
 import { version, name } from '../package.json'
-import { colorLog } from './patternLog'
-const { doneLog, errorLog, okayLog, timeKey } = colorLog('electron-builder')
+
+interface BuilderOptions {
+  isCreateExe: boolean
+  isAsar: boolean
+  archs: string[]
+}
 
 const config: Configuration = {
   asar: false,
@@ -62,28 +65,25 @@ const config: Configuration = {
   }
 }
 
-console.time(timeKey('build'))
-const rawOptions: CliOptions = { config }
+export default (isDefault: boolean, options?: BuilderOptions): CliOptions => {
+  const defaultPlatformKey = process.platform === 'win32' ? process.arch : process.platform
 
-export const runElectronBuilder = async (archs: string[], isCreateExe: boolean) => {
-  okayLog('输出可执行程序')
-  const setArch = (options: string[]) => options.forEach(key => (rawOptions[key] = true))
-
-  if (archs.length) {
-    setArch(archs)
-  } else {
-    setArch([process.arch])
+  if (isDefault) {
+    return { config, [defaultPlatformKey]: true }
   }
 
-  if (!isCreateExe) setArch(['dir'])
+  if (!options) throw new Error('electron-builder配置项缺失')
 
-  build(rawOptions)
-    .then(_ => {
-      doneLog(`${archs.length ? archs.toString() : process.arch}安装包打包完成`)
-      console.timeEnd(timeKey('build'))
-    })
-    .catch(error => {
-      errorLog(error)
-      process.exit(1)
-    })
+  const { isCreateExe, isAsar, archs } = options
+
+  const rawOptions: CliOptions = { config: { ...config, asar: isAsar } }
+  const setArch = (options: string[]) => options.forEach(key => (rawOptions[key] = true))
+
+  if (archs.length) setArch(archs)
+  else setArch([defaultPlatformKey])
+
+  return {
+    ...rawOptions,
+    dir: !isCreateExe
+  }
 }

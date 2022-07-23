@@ -1,4 +1,4 @@
-import 'zx/globals'
+import { $, path } from 'zx'
 import { watch } from 'rollup'
 import getOption from './rollup.config'
 import { config as getEnv } from 'dotenv'
@@ -13,7 +13,7 @@ const mainOptions = getOption({ ...devEnv, ...globalEnv, PORT: port } as unknown
 const watcher = watch(mainOptions)
 
 watcher.on('change', filename => {
-  console.log(`\n主进程文件变更`, filename)
+  console.log(`主进程文件变更`, filename)
 })
 
 watcher.on('event', async event => {
@@ -47,7 +47,7 @@ function startElectron() {
   electronProcess.stderr.on('data', removeJunk)
 
   electronProcess.on('close', () => {
-    if (!manualRestart) process.exit()
+    manualRestart || process.exit()
   })
 }
 
