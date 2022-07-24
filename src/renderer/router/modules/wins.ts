@@ -30,5 +30,10 @@ export default [
     name: 'download-demo',
     path: `/download-demo`,
     component: () => import('@/win/DownloadDemo')
+  },
+  {
+    name: 'Font-demo',
+    path: `/Font-demo`,
+    component: () => import('@/win/FontDemo/index.vue')
   }
 ] as RouteRecordRaw[]
