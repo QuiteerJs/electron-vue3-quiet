@@ -14,5 +14,12 @@ declare namespace Wicket {
   }
 
   // 定义win文件夹下的所有窗口
-  type WindowRoute = 'loading' | 'feel-brid' | 'drop-demo' | 'print-demo' | 'sql-demo' | 'download-demo'
+  type WindowRoute =
+    | 'loading'
+    | 'feel-brid'
+    | 'drop-demo'
+    | 'print-demo'
+    | 'sql-demo'
+    | 'download-demo'
+    | 'font-demo'
 }

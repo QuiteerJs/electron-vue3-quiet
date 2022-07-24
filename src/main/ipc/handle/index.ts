@@ -2,6 +2,7 @@ import { WinKey } from '@enums/window'
 import { ipcMain, BrowserWindow } from 'electron'
 import { winMap, getWin, winRead } from '~/window/create/win.map'
 
+import { getFonts } from 'font-list'
 import { libPath } from '~/config'
 import { Library } from 'ffi-napi'
 import { join } from 'path'
@@ -61,5 +62,9 @@ export function initHandleIpc() {
       // add (a: number, b: number) => (a + b)
       return lib.add(a, b)
     }
+  })
+
+  ipcMain.handle('getFonts', async () => {
+    return await getFonts().catch(e => [])
   })
 }
