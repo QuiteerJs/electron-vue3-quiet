@@ -16,15 +16,20 @@
       <button class="grip-right" type="button" @click="() => (silent = !silent)">
         {{ silent ? '' : '非' }}静默打印
       </button>
-      <button class="grip-right" type="button" @click="() => (printBackground = !printBackground)">
+      <button
+        v-show="silent"
+        class="grip-right"
+        type="button"
+        @click="() => (printBackground = !printBackground)"
+      >
         {{ printBackground ? '使用' : '不使用' }}背景色
       </button>
-      <button type="button" @click="() => (color = !color)">
+      <button v-show="silent" type="button" @click="() => (color = !color)">
         {{ color ? '彩色' : '黑白' }}
       </button>
     </div>
     <div class="line" />
-    <div class="row">
+    <div v-show="silent" class="row">
       <span class="grip-right">边距:</span>
       <select v-model="margins.marginType" class="grip-right">
         <option v-for="(item, index) in marginTypes" :key="index" :value="item">
@@ -32,14 +37,14 @@
         </option>
       </select>
     </div>
-    <div v-show="margins.marginType === 'custom'" class="row">
+    <div v-show="margins.marginType === 'custom' && silent" class="row">
       <label class="grip-right">上边距: <input v-model.number="margins.top" class="small" />px</label>
       <label class="grip-right">下边距: <input v-model.number="margins.bottom" class="small" />px</label>
       <label class="grip-right">左边距: <input v-model.number="margins.left" class="small" />px</label>
       <label class="grip-right">右边距: <input v-model.number="margins.right" class="small" />px</label>
     </div>
-    <div class="line" />
-    <div class="row">
+    <div v-show="silent" class="line" />
+    <div v-show="silent" class="row">
       <span class="grip-right">尺寸:</span>
       <!-- <div class="fake-radio"  @click="() => selPageSizeType = 0">{{ selPageSizeType === 0 ? '√' : '' }}</div> -->
       <select v-model="pageSizeString" class="grip-right">
@@ -56,7 +61,7 @@
       <label class="grip-right">高度: <input class="normal" v-model.number="pageSizeObject.height" />μm</label>
       <span class="tips">1mm = 1000μm</span>
     </div> -->
-    <div class="line" />
+    <div v-show="silent" class="line" />
     <div class="row">
       <div style="width: 100px; height: 100px; background: red" class="grip-right" />
       <img
