@@ -10,5 +10,6 @@ export const enum WinKey {
   PRINT = 'print-demo',
   DROP = 'drop-demo',
   SQL = 'sql-demo',
-  DOWNLOAD = 'download-demo'
+  DOWNLOAD = 'download-demo',
+  THEME = 'theme'
 }

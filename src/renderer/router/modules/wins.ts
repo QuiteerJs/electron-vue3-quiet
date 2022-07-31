@@ -30,5 +30,10 @@ export default [
     name: 'download-demo',
     path: `/download-demo`,
     component: () => import('@/win/DownloadDemo')
+  },
+  {
+    name: 'theme',
+    path: `/theme`,
+    component: () => import('@/win/Theme/index.vue')
   }
 ] as RouteRecordRaw[]
