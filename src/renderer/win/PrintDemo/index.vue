@@ -73,7 +73,7 @@
 </template>
 <script lang="ts" setup>
 import IpcOnMounted from '@/components/IpcOnMounted'
-
+/** 静默打印页面模糊 */
 const selName = ref('')
 const printers = ref<Electron.PrinterInfo[]>([])
 const silent = ref(false)
