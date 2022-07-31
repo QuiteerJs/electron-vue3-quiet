@@ -66,7 +66,7 @@ const config: Configuration = {
 }
 
 export default (isDefault: boolean, options?: BuilderOptions): CliOptions => {
-  const defaultPlatformKey = process.platform === 'win32' ? process.arch : process.platform
+  const defaultPlatformKey = process.arch
 
   if (isDefault) {
     return { config, [defaultPlatformKey]: true }
