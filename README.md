@@ -12,7 +12,7 @@
 
 ## 文档地址
 
-> https://www.wolai.com/3hD6e4iUkRaRmezu3Ds3Dd
+> https://taiaiac.github.io/electron-vue3-quiet-doc/
 
 ## 技术栈关键字
 
