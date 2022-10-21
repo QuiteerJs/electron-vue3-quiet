@@ -1,9 +1,9 @@
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import Components from 'unplugin-vue-components/vite'
-import { FileSystemIconLoader } from 'unplugin-icons/loaders'
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
+import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
 
 export default (srcPath: string) => {
   return [
@@ -18,6 +18,7 @@ export default (srcPath: string) => {
       jsx: 'preact'
     }),
     AutoImport({
+      dts: `../types/auto-imports.d.ts`,
       imports: [
         'vue',
         'vue-router',
@@ -29,7 +30,7 @@ export default (srcPath: string) => {
       ]
     }),
     Components({
-      dts: true,
+      dts: `../types/components.d.ts`,
       resolvers: [
         IconsResolver({
           customCollections: ['custom'],
