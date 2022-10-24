@@ -1,12 +1,3 @@
-<script lang="ts">
-</script>
-
-<script>
-export default {
-  name: 'FeelBrid',
-}
-</script>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 import IpcOnMounted from '@/components/IpcOnMounted'

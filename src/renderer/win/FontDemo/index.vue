@@ -1,12 +1,3 @@
-<script lang="ts">
-</script>
-
-<script>
-export default {
-  name: 'FontDemo',
-}
-</script>
-
 <script lang="ts" setup>
 import { ref } from 'vue'
 import IpcOnMounted from '@/components/IpcOnMounted'

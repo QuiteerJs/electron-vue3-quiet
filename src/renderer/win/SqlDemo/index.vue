@@ -1,12 +1,3 @@
-<script lang="ts">
-</script>
-
-<script>
-export default {
-  name: 'SqlDemo',
-}
-</script>
-
 <script setup lang="ts">
 import type { DataTableColumn } from 'naive-ui'
 import IpcOnMounted from '@/components/IpcOnMounted'
@@ -22,7 +13,7 @@ const data = ref<Sql.UserEntity[]>([])
 
 const search = async () => {
   const res = await window.$ipc.invoke<unknown, Sql.UserEntity[]>('sql-option', 'user-search-all')
-  console.log('res: ', res)
+  console.info('res: ', res)
   if (res) {
     window.$message.success('查询表成功!')
     data.value = res
