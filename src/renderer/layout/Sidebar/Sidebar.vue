@@ -1,14 +1,16 @@
-<template>
-  <div class="content">
-    <Menu v-for="item in routes" :key="item.name" :route="item" />
-  </div>
-</template>
 <script setup lang="ts">
 import Menu from './Menu/Menu.vue'
 
 const router = useRouter()
 const [{ children: routes }] = router.options.routes.filter(route => route.name === 'home')
 </script>
+
+<template>
+  <div class="content">
+    <Menu v-for="item in routes" :key="item.name" :route="item" />
+  </div>
+</template>
+
 <style scoped>
 .content {
   height: calc(100vh - 3.5rem);

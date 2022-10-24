@@ -1,6 +1,6 @@
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { cloneDeep } from 'lodash-es'
-import { themeSetting, getColorPalette, addColorAlpha } from './settings'
+import { addColorAlpha, getColorPalette, themeSetting } from './settings'
 
 /** 获取主题配置 */
 export function getThemeSettings() {
@@ -31,13 +31,13 @@ function getThemeColors(colors: [ColorType, string][]) {
     { scene: 'Suppl', handler: color => color },
     { scene: 'Hover', handler: color => getColorPalette(color, 5) },
     { scene: 'Pressed', handler: color => getColorPalette(color, 7) },
-    { scene: 'Active', handler: color => addColorAlpha(color, 0.1) }
+    { scene: 'Active', handler: color => addColorAlpha(color, 0.1) },
   ]
 
   const themeColor: ThemeColor = {}
 
-  colors.forEach(color => {
-    colorActions.forEach(action => {
+  colors.forEach((color) => {
+    colorActions.forEach((action) => {
       const [colorType, colorValue] = color
       const colorKey: ColorKey = `${colorType}Color${action.scene}`
       themeColor[colorKey] = action.handler(colorValue)
@@ -58,17 +58,17 @@ export function getNaiveThemeOverrides(colors: Record<ColorType, string>): Globa
     ['info', info],
     ['success', success],
     ['warning', warning],
-    ['error', error]
+    ['error', error],
   ])
 
   const colorLoading = primary
 
   return {
     common: {
-      ...themeColors
+      ...themeColors,
     },
     LoadingBar: {
-      colorLoading
-    }
+      colorLoading,
+    },
   }
 }

@@ -1,4 +1,4 @@
-import { watch, onUnmounted } from 'vue'
+import { onUnmounted, watch } from 'vue'
 import { useOsTheme } from 'naive-ui'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { kebabCase } from 'lodash-es'
@@ -14,55 +14,52 @@ export function subTheme() {
   // 监听主题颜色
   const stopThemeColor = watch(
     () => theme.themeColor,
-    newValue => {
+    (newValue) => {
       console.log('newValue: ', newValue)
     },
-    { immediate: true }
+    { immediate: true },
   )
 
   // 监听naiveUI themeOverrides
   const stopThemeOverrides = watch(
     () => theme.naiveThemeOverrides,
-    newValue => {
-      if (newValue.common) {
+    (newValue) => {
+      if (newValue.common)
         addThemeCssVarsToHtml(newValue.common)
-      }
     },
-    { immediate: true }
+    { immediate: true },
   )
 
   // 监听暗黑模式
   const stopDarkMode = watch(
     () => theme.darkMode,
-    newValue => {
-      if (newValue) {
+    (newValue) => {
+      if (newValue)
         addDarkClass()
-      } else {
+      else
         removeDarkClass()
-      }
     },
     {
-      immediate: true
-    }
+      immediate: true,
+    },
   )
 
   // 监听操作系统主题模式
   const stopOsTheme = watch(
     osTheme,
-    newValue => {
+    (newValue) => {
       const isDark = newValue === 'dark'
       theme.autoFollowSystemMode(isDark)
     },
-    { immediate: true }
+    { immediate: true },
   )
 
   // 禁用横向滚动(页面切换时,过渡动画会产生水平方向的滚动条, 小于最小宽度时，不禁止)
-  const stopWidth = watch(width, newValue => {
-    if (newValue < theme.layout.minWidth) {
+  const stopWidth = watch(width, (newValue) => {
+    if (newValue < theme.layout.minWidth)
       document.documentElement.style.overflowX = 'auto'
-    } else {
+    else
       document.documentElement.style.overflowX = 'hidden'
-    }
   })
 
   onUnmounted(() => {
@@ -85,7 +82,7 @@ function handleCssDarkMode() {
   }
   return {
     addDarkClass,
-    removeDarkClass
+    removeDarkClass,
   }
 }
 
@@ -96,7 +93,7 @@ type ThemeVarsKeys = keyof ThemeVars
 function addThemeCssVarsToHtml(themeVars: ThemeVars) {
   const keys = Object.keys(themeVars) as ThemeVarsKeys[]
   const style: string[] = []
-  keys.forEach(key => {
+  keys.forEach((key) => {
     style.push(`--${kebabCase(key)}: ${themeVars[key]}`)
   })
   const styleStr = style.join(';')

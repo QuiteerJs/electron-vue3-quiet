@@ -3,7 +3,7 @@ import { useDownload } from '@/hooks'
 
 export default defineComponent({
   name: 'DownloadDemo',
-  setup(props, context) {
+  setup() {
     const { progress, downloadInfo, downloadStart } = useDownload()
 
     watchEffect(() => {
@@ -16,7 +16,7 @@ export default defineComponent({
         url: 'http://erp.ghaomc.com/api/v1/media/temp/temp/694da8bd-849a-493a-929a-a478ce65b8b7.png',
         filename: '银杰优优.exe',
         // 是否返回进度
-        isSendProgress: true
+        isSendProgress: true,
       })
 
     return () => (
@@ -32,5 +32,5 @@ export default defineComponent({
         </main>
       </>
     )
-  }
+  },
 })

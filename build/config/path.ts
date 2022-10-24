@@ -11,6 +11,6 @@ export function resolvePath(rootPath: string, basePath: string) {
 
   return {
     root: normalizePath(root),
-    renderer: normalizePath(src)
+    renderer: normalizePath(src),
   }
 }

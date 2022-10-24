@@ -2,12 +2,14 @@ import type { AxiosError } from 'axios'
 import { statusCodeMap } from './statusCodeMap'
 
 async function showMessage(key: string | number, axiosError: AxiosError) {
-  if (!statusCodeMap.has(key)) return
+  if (!statusCodeMap.has(key))
+    return
 
   console.log('已捕获的错误处理')
   window.$message.destroyAll()
   const handle = statusCodeMap.get(key)
-  if (!handle) return
+  if (!handle)
+    return
   const message = await handle(axiosError)
   window.$message.warning(message)
 }
@@ -20,7 +22,7 @@ export async function handleAxiosError(axiosError: AxiosError) {
   const err = {
     status: axiosError.response?.status,
     code: axiosError.code,
-    message: axiosError.message
+    message: axiosError.message,
   }
 
   for (const key in err) showMessage(err[key], axiosError)

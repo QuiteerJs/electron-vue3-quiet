@@ -1,3 +1,17 @@
+<script lang="ts">
+</script>
+
+<script>
+export default {
+  name: 'FeelBrid',
+}
+</script>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import IpcOnMounted from '@/components/IpcOnMounted'
+</script>
+
 <template>
   <IpcOnMounted />
   <div id="sky">
@@ -26,16 +40,6 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'FeelBrid'
-}
-</script>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import IpcOnMounted from '@/components/IpcOnMounted'
-</script>
 
 <style lang="scss" scoped>
 body {

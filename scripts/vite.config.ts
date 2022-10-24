@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite'
-import { resolveConfig, viteDefine, resolvePath, setupVitePlugins } from '../build'
 import { resolve } from 'path'
+import { defineConfig } from 'vite'
+import { resolveConfig, resolvePath, setupVitePlugins, viteDefine } from '../build'
 
-export default defineConfig(configEnv => {
+export default defineConfig((configEnv) => {
   const { root, renderer } = resolvePath('../', import.meta.url)
 
   return {
@@ -16,12 +16,12 @@ export default defineConfig(configEnv => {
       minify: 'esbuild',
       reportCompressedSize: false,
       emptyOutDir: false,
-      chunkSizeWarningLimit: 2000
+      chunkSizeWarningLimit: 2000,
     },
     server: {
-      host: '0.0.0.0'
+      host: '0.0.0.0',
     },
     plugins: [...setupVitePlugins(configEnv, renderer)],
-    publicDir: resolve(root, 'public')
+    publicDir: resolve(root, 'public'),
   }
 })

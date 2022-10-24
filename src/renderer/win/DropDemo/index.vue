@@ -1,9 +1,3 @@
-<template>
-  <div class="drop-container" :class="{ show: isDragover }">
-    <div class="tips">将文件拖到这里进行添加</div>
-  </div>
-  <IpcOnMounted />
-</template>
 <script lang="ts" setup>
 import IpcOnMounted from '@/components/IpcOnMounted'
 
@@ -28,13 +22,14 @@ async function dropHandle(e: DragEvent) {
       const file = files[i]
       fetchFile(file.path)
     }
-  } else if (e.dataTransfer?.items.length) {
+  }
+  else if (e.dataTransfer?.items.length) {
     // 处理网页拖拽
     for (let i = 0; i < e.dataTransfer.items.length; i++) {
       const item = e.dataTransfer.items[i]
       if (item.kind === 'string') {
-        if (item.type.indexOf('text/html') !== -1) {
-          item.getAsString(async str => {
+        if (item.type.includes('text/html')) {
+          item.getAsString(async (str) => {
             const dom = new DOMParser().parseFromString(str, 'text/html')
             getDomFile([], dom.body).map(path => fetchFile(path))
           })
@@ -55,14 +50,13 @@ function dragoverHandle(e: DragEvent) {
 function getDomFile(fileList: string[] = [], dom: HTMLElement) {
   for (let i = 0; i < dom.children.length; i++) {
     if (
-      dom.children[i] instanceof HTMLImageElement ||
-      dom.children[i] instanceof HTMLAudioElement ||
-      dom.children[i] instanceof HTMLVideoElement
-    ) {
+      dom.children[i] instanceof HTMLImageElement
+      || dom.children[i] instanceof HTMLAudioElement
+      || dom.children[i] instanceof HTMLVideoElement
+    )
       fileList.push((dom.children[i] as HTMLImageElement | HTMLAudioElement | HTMLVideoElement).src)
-    } else {
+    else
       getDomFile(fileList, dom.children[i] as HTMLElement)
-    }
   }
   return fileList
 }
@@ -71,22 +65,34 @@ async function fetchFile(path: string) {
   try {
     const res = await fetch(path)
     const blob = await res.blob()
+
     console.log(
       JSON.stringify(
         {
           type: blob.type,
           size: blob.size,
-          path
+          path,
         },
         null,
-        2
-      )
+        2,
+      ),
     )
-  } catch (err) {
+  }
+  catch (err) {
     console.error('getBlobByPath', err)
   }
 }
 </script>
+
+<template>
+  <div class="drop-container" :class="{ show: isDragover }">
+    <div class="tips">
+      将文件拖到这里进行添加
+    </div>
+  </div>
+  <IpcOnMounted />
+</template>
+
 <style scoped>
 .drop-container {
   position: absolute;

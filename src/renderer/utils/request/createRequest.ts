@@ -1,6 +1,6 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosError } from 'axios'
-import { handleAxiosError } from './handleAxiosError'
+import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
+import { handleAxiosError } from './handleAxiosError'
 
 interface RequestOptions {
   url: string
@@ -22,20 +22,21 @@ class CustomAxiosInstance {
   }
 
   setInterceptor() {
-    this.instance.interceptors.request.use(async config => {
+    this.instance.interceptors.request.use(async (config) => {
       return config
     }, handleAxiosError)
 
     this.instance.interceptors.response.use(
       async response =>
         new Promise((resolve, reject): any => {
-          const { status, config, data } = response
+          const { status, data } = response
 
-          if (status !== 200) reject(false)
+          if (status !== 200)
+            reject(new Error('状态码错误！'))
 
           resolve(data)
         }),
-      handleAxiosError
+      handleAxiosError,
     )
   }
 }
@@ -106,6 +107,6 @@ export function createRequest(axiosConfig: AxiosRequestConfig) {
     get,
     post,
     put,
-    delete: handleDelete
+    delete: handleDelete,
   }
 }

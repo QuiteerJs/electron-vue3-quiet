@@ -5,7 +5,8 @@ class GlobalMenuShortcuts {
   menu: Menu
 
   static getInstance() {
-    if (this.instance) return this.instance
+    if (this.instance)
+      return this.instance
 
     return (this.instance = new GlobalMenuShortcuts())
   }
@@ -17,8 +18,8 @@ class GlobalMenuShortcuts {
         label: '退出',
         click() {
           BrowserWindow.getAllWindows().map(win => win.isFocused() && win.hide())
-        }
-      }
+        },
+      },
     ]
 
     this.menu = Menu.buildFromTemplate(template)
@@ -31,14 +32,14 @@ class GlobalMenuShortcuts {
         {
           label: '刷新',
           role: 'reload',
-          accelerator: 'Ctrl + R'
+          accelerator: 'Ctrl + R',
         },
         {
           label: '控制台',
           role: 'toggleDevTools',
-          accelerator: 'Ctrl + Shift + I'
-        }
-      ]
+          accelerator: 'Ctrl + Shift + I',
+        },
+      ],
     })
   }
 

@@ -1,7 +1,7 @@
 const toFormData = (obj: object) => {
   const formData = new FormData()
-  Object.keys(obj).forEach(key => {
-    if (obj[key] instanceof Array) {
+  Object.keys(obj).forEach((key) => {
+    if (Array.isArray(obj[key])) {
       obj[key].forEach((item: any) => {
         formData.append(key, item)
       })

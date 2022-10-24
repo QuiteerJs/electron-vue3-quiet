@@ -11,5 +11,5 @@ export const enum WinKey {
   DROP = 'drop-demo',
   SQL = 'sql-demo',
   DOWNLOAD = 'download-demo',
-  FONT = 'font-demo'
+  FONT = 'font-demo',
 }

@@ -16,12 +16,11 @@ export function useDownload() {
       window.$ipc
         .invoke<Download.DownloadOptions, Download.DownloadDetails>('download-option', 'file', {
           ...optsions,
-          eventKey
+          eventKey,
         })
-        .then(data => {
-          if (data.isSuccess) {
+        .then((data) => {
+          if (data.isSuccess)
             window.$message.success(data.message)
-          }
 
           info.value = data
           window.$ipc.removeAllListeners(eventName)

@@ -7,7 +7,7 @@ import visualizer from './visualizer'
 import lint from './lint'
 
 /**
- *	vite插件
+ * vite插件
  * @param configEnv - 环境
  * @param srcPath - src路径
  * @param viteEnv - 环境变量配置
@@ -15,9 +15,8 @@ import lint from './lint'
 export function setupVitePlugins(configEnv: ConfigEnv, srcPath: string): (PluginOption | PluginOption[])[] {
   const plugins = [vue, jsx, ...autoImport(srcPath), windicss, lint]
 
-  if (configEnv.command === 'build') {
+  if (configEnv.command === 'build')
     plugins.push(visualizer)
-  }
 
   return plugins
 }

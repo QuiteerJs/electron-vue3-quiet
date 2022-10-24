@@ -1,8 +1,8 @@
-import { useLoadingBar, useNotification, useDialog, useMessage } from 'naive-ui'
+import { useDialog, useLoadingBar, useMessage, useNotification } from 'naive-ui'
 
 export default defineComponent({
   name: 'IpcOnMounted',
-  setup(props, { attrs, emit, expose, slots }) {
+  setup(props, { expose }) {
     window.$message = useMessage()
     window.$dialog = useDialog()
     window.$notification = useNotification()
@@ -17,5 +17,5 @@ export default defineComponent({
     expose({ winStatus })
 
     return { winStatus }
-  }
+  },
 })

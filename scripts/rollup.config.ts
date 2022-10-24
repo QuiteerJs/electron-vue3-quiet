@@ -2,6 +2,7 @@
 import { builtinModules } from 'module'
 import path from 'path'
 // 提供别名
+import { readdirSync } from 'fs'
 import alias from '@rollup/plugin-alias'
 //  将common依赖包转为es模块
 import commonjs from '@rollup/plugin-commonjs'
@@ -16,7 +17,6 @@ import obfuscator from 'rollup-plugin-obfuscator'
 // 注入环境变量
 import replace from '@rollup/plugin-replace'
 import { defineConfig } from 'rollup'
-import { readdirSync } from 'fs'
 
 import { dependencies } from '../package.json'
 
@@ -36,17 +36,18 @@ const inputOptions = () => {
   const files: string[] = readdirSync(resolve('src/preload'))
   return files.reduce(
     (pre, now) => {
-      if (now === 'main')
+      if (now === 'main') {
         return {
           ...pre,
-          preload: resolve(`src/preload/${now}/index.ts`)
+          preload: resolve(`src/preload/${now}/index.ts`),
         }
+      }
       return {
         ...pre,
-        [now]: resolve(`src/preload/${now}/index.ts`)
+        [now]: resolve(`src/preload/${now}/index.ts`),
       }
     },
-    { main: resolve('src/main/index.ts') }
+    { main: resolve('src/main/index.ts') },
   )
 }
 
@@ -60,30 +61,32 @@ export default (env: NodeJS.ProcessEnv, isClearness?: boolean) => {
       format: 'cjs',
       sourcemap: false,
       sanitizeFileName: (fileName: string) => {
-        if (fileName === 'preload') return `preload/main`
-        if (fileName !== 'main') return `preload/${fileName}`
+        if (fileName === 'preload')
+          return 'preload/main'
+        if (fileName !== 'main')
+          return `preload/${fileName}`
         return fileName
-      }
+      },
     },
     plugins: [
       replace({
         preventAssignment: true,
-        ...transformEnv(env)
+        ...transformEnv(env),
       }),
       alias({
         entries: [
           { find: '~', replacement: resolve('src/main') },
           { find: '@common', replacement: resolve('src/common') },
-          { find: '@enums', replacement: resolve('src/enums') }
-        ]
+          { find: '@enums', replacement: resolve('src/enums') },
+        ],
       }),
       commonjs({
         // 如果为false，则跳过CommonJS模块的源映射生成。这将提高性能。
-        sourceMap: false
+        sourceMap: false,
       }),
       nodeResolve({
         // 指定插件将要操作的文件的扩展名。
-        extensions: ['.mjs', '.ts', '.js', '.json', '.node']
+        extensions: ['.mjs', '.ts', '.js', '.json', '.node'],
       }),
       json(),
       esbuild({
@@ -95,15 +98,15 @@ export default (env: NodeJS.ProcessEnv, isClearness?: boolean) => {
         target: 'esnext', // default, or 'es20XX', 'esnext'
         // Like @rollup/plugin-replace
         define: {
-          __VERSION__: '"x.y.z"'
+          __VERSION__: '"x.y.z"',
         },
         loaders: {
           '.json': 'json',
-          '.ts': 'ts'
-        }
+          '.ts': 'ts',
+        },
       }),
-      isPord && !isClearness ? obfuscator({}) : null
+      isPord && !isClearness ? obfuscator({}) : null,
     ],
-    external: [...builtinModules, ...Object.keys(dependencies), 'electron']
+    external: [...builtinModules, ...Object.keys(dependencies), 'electron'],
   })
 }

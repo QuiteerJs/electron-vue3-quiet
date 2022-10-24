@@ -5,23 +5,23 @@ const stairRouters: Array<RouteRecordRaw> = [
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('@/pages/NotFound.vue')
+    component: () => import('@/pages/NotFound.vue'),
   },
-  { path: '/', redirect: '/home' }
+  { path: '/', redirect: '/home' },
 ]
 
 const childRoute: Record<string, any> = import.meta.globEager('./modules/*.ts')
 
 const mainRouters: Array<RouteRecordRaw> = Object.values(childRoute).reduce(
   (pre, now) => [...pre, ...now.default],
-  []
+  [],
 )
 
 const routes: Array<RouteRecordRaw> = [...stairRouters, ...mainRouters]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 })
 
 export default router

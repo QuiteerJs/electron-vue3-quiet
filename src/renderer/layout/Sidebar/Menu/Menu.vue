@@ -1,8 +1,3 @@
-<template>
-  <div class="menu" :class="active ? '!bg-[#DDDFE2]' : 'bg-[#1A1D25]'" @click="checkRoute">
-    <Icon :icon="route.meta?.icon" class="text-24px" />
-  </div>
-</template>
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
 import { Icon } from '@iconify/vue'
@@ -20,6 +15,13 @@ const checkRoute = () => {
 // console.log('routes: ', routes)
 // console.log('router: ', router)
 </script>
+
+<template>
+  <div class="menu" :class="active ? '!bg-[#DDDFE2]' : 'bg-[#1A1D25]'" @click="checkRoute">
+    <Icon :icon="route.meta?.icon" class="text-24px" />
+  </div>
+</template>
+
 <style scoped>
 .menu {
   @apply w-38px h-38px rounded flex justify-center items-center m-auto mt-10px;

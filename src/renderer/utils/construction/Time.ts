@@ -15,7 +15,8 @@ export class Time {
     const date = this.time.getFullYear()
     const now = this.now.getFullYear()
 
-    if (date != now) return `${this.time.getFullYear()}/${this.time.getMonth() + 1}/${this.time.getDate()}`
+    if (date !== now)
+      return `${this.time.getFullYear()}/${this.time.getMonth() + 1}/${this.time.getDate()}`
     return false
   }
 
@@ -24,7 +25,8 @@ export class Time {
     const date = this.time.getMonth() + 1
     const now = this.now.getMonth() + 1
 
-    if (date != now) return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
+    if (date !== now)
+      return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
     return false
   }
 
@@ -35,13 +37,17 @@ export class Time {
     const now = this.now.getDate()
     const weekSum = this.now.getDay()
 
-    if (now - date < 2) return false
+    if (now - date < 2)
+      return false
 
-    if (now - date > 6) return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
+    if (now - date > 6)
+      return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
 
-    if (!weekSum) return `星期${week[this.time.getDay()]}`
+    if (!weekSum)
+      return `星期${week[this.time.getDay()]}`
 
-    if (now - date < weekSum) return `星期${week[this.time.getDay()]}`
+    if (now - date < weekSum)
+      return `星期${week[this.time.getDay()]}`
 
     return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
   }
@@ -50,7 +56,8 @@ export class Time {
   ifYesterday() {
     const date = this.time.getDate()
     const now = this.now.getDate()
-    if (now - date > 0) return '昨天'
+    if (now - date > 0)
+      return '昨天'
     return false
   }
 
@@ -58,9 +65,9 @@ export class Time {
   ifDay() {
     const date = this.time.getDate()
     const now = this.now.getDate()
-    if (date == now) {
+    if (date === now)
       return `${this.time.getHours()}:${this.time.getMinutes().toString().padStart(2, '0')}`
-    }
+
     return false
   }
 }

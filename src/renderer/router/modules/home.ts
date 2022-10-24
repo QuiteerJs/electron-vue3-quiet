@@ -14,8 +14,8 @@ export default [
         component: () => import('@/pages/Electron'),
         meta: {
           title: 'electron',
-          icon: 'logos:electron'
-        }
+          icon: 'logos:electron',
+        },
       },
       {
         name: 'vite',
@@ -23,8 +23,8 @@ export default [
         component: () => import('@/pages/Vite'),
         meta: {
           title: 'vite',
-          icon: 'vscode-icons:file-type-vite'
-        }
+          icon: 'vscode-icons:file-type-vite',
+        },
       },
       {
         name: 'vue',
@@ -32,8 +32,8 @@ export default [
         component: () => import('@/pages/Vue'),
         meta: {
           title: 'vue',
-          icon: 'vscode-icons:file-type-vue'
-        }
+          icon: 'vscode-icons:file-type-vue',
+        },
       },
       {
         name: 'javascript',
@@ -41,9 +41,9 @@ export default [
         component: () => import('@/pages/Vue'),
         meta: {
           title: 'javascript',
-          icon: 'logos:javascript'
-        }
-      }
+          icon: 'logos:javascript',
+        },
+      },
       // {
       //   name: 'windicss',
       //   path: 'windicss',
@@ -55,6 +55,6 @@ export default [
       //   component: () => import('@/pages/Test/i18n.vue')
       // },
       // { path: '/print', name: 'Print', component: () => import('@/pages/Print.vue') }
-    ]
-  }
+    ],
+  },
 ] as RouteRecordRaw[]

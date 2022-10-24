@@ -5,10 +5,10 @@ export default defineComponent({
   props: {
     cardList: {
       type: Array as PropType<Component.CardState[]>,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
-  setup(props, { attrs, emit, expose, slots }) {
+  setup(props) {
     const { cardList } = props
 
     const openNewWindow = (item: Component.CardState) => {
@@ -17,7 +17,7 @@ export default defineComponent({
 
     return () => (
       <div class="p-2 flex flex-wrap select-none">
-        {cardList.map(item => {
+        {cardList.map((item) => {
           return (
             <n-card
               hoverable
@@ -31,5 +31,5 @@ export default defineComponent({
         })}
       </div>
     )
-  }
+  },
 })

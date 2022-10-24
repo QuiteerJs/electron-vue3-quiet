@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="content" a:bg="base">
     <!-- <div a:text="30px primary" a:p="b-20px" a:bg="info-active">primary</div>
@@ -9,7 +11,7 @@
     <RouterView />
   </div>
 </template>
-<script setup lang="ts"></script>
+
 <style scoped>
 .content {
   height: calc(100vh - 3.5rem);

@@ -10,5 +10,5 @@ contextBridge.exposeInMainWorld('$ipc', {
   on: (...args: IpcParameters<'on'>): IpcReturnType<'on'> => ipcRenderer.on(...args),
   once: (...args: IpcParameters<'once'>): IpcReturnType<'once'> => ipcRenderer.once(...args),
   removeAllListeners: (...args: IpcParameters<'removeAllListeners'>): IpcReturnType<'removeAllListeners'> =>
-    ipcRenderer.removeAllListeners(...args)
+    ipcRenderer.removeAllListeners(...args),
 })

@@ -1,9 +1,9 @@
-import IpcOnMounted from '@/components/IpcOnMounted'
-import { getRenderEnv } from '@/utils'
-import TestTsx from './testTsx'
 import { RouterLink, RouterView } from 'vue-router'
+import { useDialog, useLoadingBar, useMessage, useNotification } from 'naive-ui'
+import TestTsx from './testTsx'
+import IpcOnMounted from '@/components/IpcOnMounted'
+// import { getRenderEnv } from '@/utils'
 import { useDemoStore } from '@/store'
-import { useLoadingBar, useNotification, useDialog, useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup() {
@@ -11,8 +11,8 @@ export default defineComponent({
     window.$dialog = useDialog()
     window.$notification = useNotification()
     window.$loadingBar = useLoadingBar()
-    const router = useRouter()
-    const route = useRoute()
+    // const router = useRouter()
+    // const route = useRoute()
     const demoStore = useDemoStore()
     demoStore.actionDemo('德莫')
 
@@ -48,12 +48,12 @@ export default defineComponent({
           // v-intersecting:hide={isIntersecting => showMsg('hide', 'warning')}
           v-intersecting={{
             show: () => showMsg('show', 'info'),
-            hide: () => showMsg('hide', 'warning')
+            hide: () => showMsg('hide', 'warning'),
           }}
           // v-intersecting={{ hide: isIntersecting => showMsg('hide', 'warning') }}
           v-text={'测试的哈斯大苏打'}
         />
       </>
     )
-  }
+  },
 })

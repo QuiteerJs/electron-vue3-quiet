@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import Control from './Control/index.vue'
+</script>
+
 <template>
   <div class="drag h-14 min-h-14 bg-[#2A2D39] flex justify-between px-10px">
     <div class="no-drag icon">
@@ -16,9 +20,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import Control from './Control/index.vue'
-</script>
+
 <style scoped>
 .icon {
   @apply flex justify-center items-center bg-[#14181D] w-38px h-36px  mt-10px rounded text-cyan-300 text-24px hover:opacity-80;

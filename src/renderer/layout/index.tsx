@@ -1,16 +1,16 @@
-import IpcOnMounted from '@/components/IpcOnMounted'
 import { Content } from './Content'
 import { Sidebar } from './Sidebar'
 import { Header } from './Header'
-import { testApi } from '@/api'
+import IpcOnMounted from '@/components/IpcOnMounted'
+// import { testApi } from '@/api'
 
 export default defineComponent({
   name: 'Layout',
-  setup(props, context) {
+  setup() {
     const win = ref<InstanceType<typeof IpcOnMounted> | null>()
 
     onMounted(async () => {
-      const status = await win.value?.winStatus()
+      // const status = await win.value?.winStatus()
       // console.log('status :>> ', status)
     })
 
@@ -28,5 +28,5 @@ export default defineComponent({
         </div>
       </>
     )
-  }
+  },
 })

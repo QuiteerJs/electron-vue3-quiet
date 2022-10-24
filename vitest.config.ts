@@ -1,9 +1,8 @@
-/* eslint-disable spaced-comment */
 /// <reference types="vitest" />
 /// <reference types="vitest/globals" />
 
 import { defineConfig } from 'vite'
-import { resolveConfig, viteDefine, resolvePath } from './build'
+import { resolveConfig, resolvePath, viteDefine } from './build'
 
 export default defineConfig(() => {
   const { renderer } = resolvePath('./', import.meta.url)
@@ -12,7 +11,7 @@ export default defineConfig(() => {
     resolve: resolveConfig(renderer),
     define: viteDefine,
     test: {
-      globals: true
-    }
+      globals: true,
+    },
   }
 })

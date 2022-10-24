@@ -1,3 +1,26 @@
+<script lang="ts">
+</script>
+
+<script>
+export default {
+  name: 'FontDemo',
+}
+</script>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+import IpcOnMounted from '@/components/IpcOnMounted'
+
+const fontList = ref<string[]>([])
+window.$ipc.invoke('getFonts').then((fonts) => {
+  fontList.value = fonts as string[]
+})
+
+function selectHandle(selectHandle: string) {
+  document.documentElement.style.fontFamily = selectHandle
+}
+</script>
+
 <template>
   <IpcOnMounted />
   <div class="font">
@@ -19,24 +42,6 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'FontDemo'
-}
-</script>
-<script lang="ts" setup>
-import { ref } from 'vue'
-import IpcOnMounted from '@/components/IpcOnMounted'
-
-const fontList = ref<string[]>([])
-window.$ipc.invoke('getFonts').then(fonts => {
-  fontList.value = fonts as string[]
-})
-
-function selectHandle(selectHandle: string) {
-  document.documentElement.style.fontFamily = selectHandle
-}
-</script>
 
 <style lang="scss" scoped>
 .font {

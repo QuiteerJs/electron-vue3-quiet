@@ -1,5 +1,5 @@
 import { BrowserWindow } from 'electron'
-import { WinKey } from '@enums/window'
+import type { WinKey } from '@enums/window'
 
 export const winMap = new Map<WinKey, Wicket.WinStatus>()
 
@@ -10,13 +10,14 @@ export const addWin = (key: WinKey, winId: number) => {
     isCreate: true,
     isRead: false,
     isShow: false,
-    isFocus: false
+    isFocus: false,
   })
 }
 
 export const getWin = (key: WinKey): BrowserWindow | null => {
   const status = winMap.get(key)
-  if (!status) return null
+  if (!status)
+    return null
   return BrowserWindow.fromId(status.id)
 }
 
@@ -28,10 +29,12 @@ export const winRead = (winId: number): Wicket.WinStatus | undefined => {
   let state: Wicket.WinStatus | undefined
 
   for (const [key, { id }] of winMap.entries()) {
-    if (id === winId) state = winMap.get(key)
+    if (id === winId)
+      state = winMap.get(key)
   }
 
-  if (!state) return
+  if (!state)
+    return
 
   state.isRead = true
   winMap.set(state.name, state)
@@ -58,10 +61,9 @@ export const focusChange = (key: WinKey, flag: boolean) => {
 export const onMounted = (key: WinKey, callback: () => void) => {
   const status = winMap.get(key)
 
-  if (!status?.isCreate) return
-  let id: NodeJS.Timer
-
-  id = setInterval(() => {
+  if (!status?.isCreate)
+    return
+  const id: NodeJS.Timer = setInterval(() => {
     if (status.isRead) {
       callback()
       clearInterval(id)

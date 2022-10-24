@@ -1,11 +1,10 @@
-import { addWin, hasWin, delWin, getWin, onMounted } from './create/win.map'
-import { CreateWebView } from './create/CreateWebView'
-import { CreateWindow } from './create/CreateWindow'
 import { WinKey } from '@enums/window'
-import { app, BrowserWindow, BrowserView } from 'electron'
+import { getWin, hasWin, onMounted } from './create/win.map'
+import { CreateWindow } from './create/CreateWindow'
 
 export function createMainWindow() {
-  if (hasWin(WinKey.MAIN)) return
+  if (hasWin(WinKey.MAIN))
+    return
 
   const main = new CreateWindow(WinKey.MAIN)
     .setTitle('主窗口')

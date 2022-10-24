@@ -1,7 +1,7 @@
-import { Menu, app, Tray } from 'electron'
-import { hideIcon, trayIcon } from './paths'
-import { hasWin, getWin } from '~/window/create/win.map'
+import { Menu, Tray, app } from 'electron'
 import { WinKey } from '@enums/window'
+import { hideIcon, trayIcon } from './paths'
+import { getWin, hasWin } from '~/window/create/win.map'
 
 class TrayInit {
   private static instance: TrayInit | null = null
@@ -9,7 +9,8 @@ class TrayInit {
   blink: NodeJS.Timeout | null = null
 
   static getInstance() {
-    if (this.instance) return this.instance
+    if (this.instance)
+      return this.instance
 
     return (this.instance = new TrayInit())
   }
@@ -22,13 +23,13 @@ class TrayInit {
 
   private init() {
     this.tray.on('click', () => {
-      if (!hasWin(WinKey.MAIN)) return
+      if (!hasWin(WinKey.MAIN))
+        return
 
-      if (getWin(WinKey.MAIN)?.isVisible()) {
+      if (getWin(WinKey.MAIN)?.isVisible())
         getWin(WinKey.MAIN)?.hide()
-      } else {
+      else
         getWin(WinKey.MAIN)?.show()
-      }
     })
 
     let empty = false
@@ -43,30 +44,31 @@ class TrayInit {
               this.tray.setImage(trayIcon)
             }
 
-            if (!empty) return
+            if (!empty)
+              return
 
             let flag = false
             this.blink = setInterval(() => {
               this.tray.setImage(flag ? hideIcon : trayIcon)
               flag = !flag
             }, 600)
-          }
+          },
         },
         {
           label: '重启',
           click: () => {
             app.relaunch({
-              args: process.argv.slice(1).concat(['--relaunch'])
+              args: process.argv.slice(1).concat(['--relaunch']),
             })
             app.exit(0)
-          }
+          },
         },
         {
           label: '退出',
           click: () => {
             app.exit(0)
-          }
-        }
+          },
+        },
       ])
       this.tray.popUpContextMenu(menuConfig)
     })

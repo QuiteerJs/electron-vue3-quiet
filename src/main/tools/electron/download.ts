@@ -1,5 +1,6 @@
-import { BrowserWindow, app } from 'electron'
 import { join } from 'path'
+import type { BrowserWindow } from 'electron'
+import { app } from 'electron'
 
 export const downloadItemMap = new Map<string, Electron.DownloadItem>()
 
@@ -16,9 +17,9 @@ export class Downloader {
   private win: BrowserWindow
   status: Download.DownloadStatus
   constructor(win: BrowserWindow, options: Download.DownloadOptions) {
-    if (!options.savePath && !options.isShowSaveDialog) {
+    if (!options.savePath && !options.isShowSaveDialog)
       options.savePath = app.getPath('downloads')
-    }
+
     this.options = options
     this.win = win
   }
@@ -45,7 +46,7 @@ export class Downloader {
       state,
       isSuccess: state === 'completed',
       message,
-      progress
+      progress,
     }
   }
 
@@ -61,7 +62,7 @@ export class Downloader {
       time: this.getTime(),
       url: this.item.getURL(),
       savePath: this.item.savePath,
-      filename: this.item.getFilename()
+      filename: this.item.getFilename(),
     }
   }
 
@@ -71,15 +72,17 @@ export class Downloader {
    * @returns {any}
    */
   private getTime() {
-    const int = (n: number): number => parseInt(n + '')
+    const int = (n: number): number => parseInt(`${n}`)
     const pad = (n: number): string => n.toString().padStart(2, '0')
 
     const start = this.item.getStartTime() * 1000
     const now = new Date().getTime()
     const time = +((now - start) / 1000).toFixed(2)
 
-    if (time < 60) return `${time}秒`
-    if (time / 60 < 60) return `${int(time / 60)}分${pad(int(time % 60))}秒`
+    if (time < 60)
+      return `${time}秒`
+    if (time / 60 < 60)
+      return `${int(time / 60)}分${pad(int(time % 60))}秒`
     return `${int(time / 60 / 60)}时${pad(int(time / 60))}分${pad(int(time % 60))}秒`
   }
 
@@ -89,14 +92,15 @@ export class Downloader {
    * @returns DownloadDetails
    */
   start(): Promise<Download.DownloadDetails> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.win.webContents.downloadURL(this.options.url)
 
-      this.win.webContents.session.on('will-download', async (event, item, webContents) => {
-        console.log('this.options.isShowSaveDialog: ', this.options.isShowSaveDialog)
+      this.win.webContents.session.on('will-download', async (event, item) => {
+        // console.log('this.options.isShowSaveDialog: ', this.options.isShowSaveDialog)
         if (this.options.isShowSaveDialog) {
           item.setSaveDialogOptions({ title: '请选择文件下载路径' })
-        } else {
+        }
+        else {
           const filePath = join(this.options.savePath as string, this.options.filename)
           item.setSavePath(filePath)
         }
@@ -118,14 +122,15 @@ export class Downloader {
    */
   private hanleStatus() {
     let num = 0
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.item
         .on('updated', (event, state) => {
           switch (state) {
             case 'interrupted':
               this.statusChange(state, '下载中断，可以恢复')
               if (this.item.canResume()) {
-                if (num === 3) return resolve(this.status)
+                if (num === 3)
+                  return resolve(this.status)
                 num++
                 this.item.resume()
               }
@@ -133,15 +138,15 @@ export class Downloader {
             case 'progressing':
               if (this.downloadItem.isPaused()) {
                 this.statusChange(state, '暂停下载')
-              } else {
+              }
+              else {
                 const current = this.downloadItem.getReceivedBytes()
                 const total = this.downloadItem.getTotalBytes()
                 const progress = +((current / total) * 100).toFixed(0)
 
                 this.statusChange(state, '当前进度', progress)
-                if (this.options.isSendProgress) {
+                if (this.options.isSendProgress)
                   this.win.webContents.send(`download-progressing-${this.options.eventKey}`, progress)
-                }
               }
               break
           }

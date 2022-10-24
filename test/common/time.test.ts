@@ -11,7 +11,7 @@ describe('测试获取当前时间的格式化', () => {
     }
   })
 
-  let date = new Date(2022, 5, 30)
+  const date = new Date(2022, 5, 30)
 
   it('当前', () => {
     // 修改了本地时间
@@ -24,7 +24,7 @@ describe('测试获取当前时间的格式化', () => {
     expect(new Time(new Date(2022, 5, 29)).timeStr).toEqual('昨天')
   })
 
-  it.each([27, 28])('本周', d => {
+  it.each([27, 28])('本周', (d) => {
     vi.setSystemTime(date)
     expect(new Time(new Date(2022, 5, d)).timeStr).toEqual(d === 27 ? '星期一' : '星期二')
   })

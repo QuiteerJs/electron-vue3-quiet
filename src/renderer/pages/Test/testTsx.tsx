@@ -1,15 +1,15 @@
-import { withDirectives, resolveDirective } from 'vue'
+import { resolveDirective, withDirectives } from 'vue'
 
 export default defineComponent({
   setup() {
     const msg = ref<string>('msg')
     return {
-      msg
+      msg,
     }
   },
   expose: ['msg'],
   render() {
-    const el = <h1 style={{ maxWidth: '250px' }}>{`<div v-[①]:[③].[{④}]="②"></div>`}</h1>
+    const el = <h1 style={{ maxWidth: '250px' }}>{'<div v-[①]:[③].[{④}]="②"></div>'}</h1>
     const slot = this.$slots.default && this.$slots.default()
     const footerSlot = this.$slots.footer && this.$slots.footer()
     return (
@@ -17,7 +17,7 @@ export default defineComponent({
         {this.msg}
         {withDirectives(el, [
           [resolveDirective('demo')!, () => 1, 'value', { suffix: true }],
-          [resolveDirective('ellipsis')!, 1]
+          [resolveDirective('ellipsis')!, 1],
         ])}
         <div>
           <slot />
@@ -29,5 +29,5 @@ export default defineComponent({
         <div>{footerSlot}</div>
       </div>
     )
-  }
+  },
 })

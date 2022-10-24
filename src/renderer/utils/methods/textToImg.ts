@@ -7,7 +7,8 @@ export function textToImg(text: string) {
   // 绘制文字环境
   const context = canvas.getContext('2d')
 
-  if (!context) return
+  if (!context)
+    return
   // 画布宽度
   canvas.width = 160
   // 画布高度

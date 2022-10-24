@@ -12,55 +12,62 @@ export class Time {
 
   // 判断是否今年
   ifYear() {
-    let date = this.time.getFullYear()
-    let now = this.now.getFullYear()
+    const date = this.time.getFullYear()
+    const now = this.now.getFullYear()
 
-    if (date != now) return `${this.time.getFullYear()}/${this.time.getMonth() + 1}/${this.time.getDate()}`
+    if (date !== now)
+      return `${this.time.getFullYear()}/${this.time.getMonth() + 1}/${this.time.getDate()}`
     return false
   }
 
   // 是否本月
   ifMonth() {
-    let date = this.time.getMonth() + 1
-    let now = this.now.getMonth() + 1
+    const date = this.time.getMonth() + 1
+    const now = this.now.getMonth() + 1
 
-    if (date != now) return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
+    if (date !== now)
+      return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
     return false
   }
 
   // 判断是否本周
   ifWeek() {
-    let week = ['日', '一', '二', '三', '四', '五', '六']
-    let date = this.time.getDate()
-    let now = this.now.getDate()
-    let weekSum = this.now.getDay()
+    const week = ['日', '一', '二', '三', '四', '五', '六']
+    const date = this.time.getDate()
+    const now = this.now.getDate()
+    const weekSum = this.now.getDay()
 
-    if (now - date < 2) return false
+    if (now - date < 2)
+      return false
 
-    if (now - date > 6) return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
+    if (now - date > 6)
+      return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
 
-    if (!weekSum) return `星期${week[this.time.getDay()]}`
+    if (!weekSum)
+      return `星期${week[this.time.getDay()]}`
 
-    if (now - date < weekSum) return `星期${week[this.time.getDay()]}`
+    if (now - date < weekSum)
+      return `星期${week[this.time.getDay()]}`
 
     return `${this.time.getMonth() + 1}月${this.time.getDate()}日`
   }
 
   // 判断是否是昨天
   ifYesterday() {
-    let date = this.time.getDate()
-    let now = this.now.getDate()
-    if (now - date > 0) return '昨天'
+    const date = this.time.getDate()
+    const now = this.now.getDate()
+    if (now - date > 0)
+      return '昨天'
     return false
   }
 
   // 判断是否当天
   ifDay() {
-    let date = this.time.getDate()
-    let now = this.now.getDate()
-    if (date == now) {
+    const date = this.time.getDate()
+    const now = this.now.getDate()
+    if (date === now)
       return `${this.time.getHours()}:${this.time.getMinutes().toString().padStart(2, '0')}`
-    }
+
     return false
   }
 }

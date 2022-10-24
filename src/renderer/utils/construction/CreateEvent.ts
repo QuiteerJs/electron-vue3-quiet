@@ -13,7 +13,8 @@ export class CreateEvent<Args> {
   }
 
   dispatch(args?: Args) {
-    if (!this.eventName) return
+    if (!this.eventName)
+      return
 
     const event = args ? new CustomEvent(this.eventName, { detail: args }) : new Event(this.eventName)
 

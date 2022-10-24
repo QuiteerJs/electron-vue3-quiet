@@ -1,9 +1,9 @@
-import { BrowserWindow, BrowserView, dialog, shell, nativeImage } from 'electron'
-import { addWin, delWin, onMounted, showChange, focusChange } from './win.map'
-import { WinKey } from '@enums/window'
-import { printInfo, winURL, appIcon, trayIcon, mainPreload } from '~/config/index'
-import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
+import { BrowserView, BrowserWindow, dialog, nativeImage, shell } from 'electron'
+import type { WinKey } from '@enums/window'
 import axios from 'axios'
+import { addWin, delWin, focusChange, showChange } from './win.map'
+import { appIcon, mainPreload, printInfo, trayIcon } from '~/config/index'
+import { getMainEnv } from '~/tools/index'
 
 /**
  * 描述   创建窗口(不可重复)
@@ -37,8 +37,8 @@ export class CreateWebView {
         // 允许跨域
         webSecurity: false,
         // 在macos中启用橡皮动画
-        scrollBounce: process.platform === 'darwin'
-      }
+        scrollBounce: process.platform === 'darwin',
+      },
     })
 
     this.win.setMenuBarVisibility(false)
@@ -53,8 +53,8 @@ export class CreateWebView {
         // 允许跨域
         webSecurity: false,
         // 在macos中启用橡皮动画
-        scrollBounce: process.platform === 'darwin'
-      }
+        scrollBounce: process.platform === 'darwin',
+      },
     })
 
     this.win.setBrowserView(this.view)
@@ -63,7 +63,7 @@ export class CreateWebView {
       width: true,
       height: true,
       horizontal: true,
-      vertical: true
+      vertical: true,
     })
     this.view.setBounds({ x: 0, y: 0, width: 960, height: 600 })
 
@@ -73,7 +73,7 @@ export class CreateWebView {
       this.win.setTitle(this.view.webContents.getTitle())
     })
 
-    this.webContents.on('did-navigate-in-page', (e, url) => {
+    this.webContents.on('did-navigate-in-page', () => {
       setTimeout(() => {
         this.win.setTitle(this.view.webContents.getTitle())
       }, 100)
@@ -84,7 +84,7 @@ export class CreateWebView {
 
       const icon = nativeImage.createFromBuffer(Buffer.from(res.data), {
         width: 128,
-        height: 128
+        height: 128,
       })
 
       this.win.setIcon(icon)
@@ -125,7 +125,7 @@ export class CreateWebView {
 
   // 阻止窗口销毁使窗口隐藏
   unClose() {
-    this.win.on('close', event => {
+    this.win.on('close', (event) => {
       event.preventDefault()
       this.win.hide()
     })
@@ -139,7 +139,7 @@ export class CreateWebView {
 
   // 外链打开url
   openExternal() {
-    this.webContents.setWindowOpenHandler(event => {
+    this.webContents.setWindowOpenHandler((event) => {
       shell.openExternal(event.url)
       return { action: 'deny' }
     })
@@ -150,7 +150,7 @@ export class CreateWebView {
   private unresponsive() {
     // 网页变得未响应时触发
     this.win.on('unresponsive', () => {
-      printInfo('error', `网页未响应`)
+      printInfo('error', '网页未响应')
 
       dialog
         .showMessageBox(this.win, {
@@ -158,10 +158,11 @@ export class CreateWebView {
           title: '警告',
           buttons: ['重载', '退出'],
           message: '图形化进程失去响应，是否等待其恢复？',
-          noLink: true
+          noLink: true,
         })
-        .then(res => {
-          if (res.response === 0) this.win.reload()
+        .then((res) => {
+          if (res.response === 0)
+            this.win.reload()
           else this.win.close()
         })
     })
@@ -170,9 +171,9 @@ export class CreateWebView {
   // 当预加载脚本mainPreload抛出一个未处理的异常错误时触发。
   private preloadError() {
     this.win.webContents.on('preload-error', (event, mainPreload, err) => {
-      printInfo('error', `预加载脚本抛出一个未处理的异常错误 event `, event)
-      printInfo('error', `预加载脚本抛出一个未处理的异常错误  `, mainPreload)
-      printInfo('error', `预加载脚本抛出一个未处理的异常错误 err `, err)
+      printInfo('error', '预加载脚本抛出一个未处理的异常错误 event ', event)
+      printInfo('error', '预加载脚本抛出一个未处理的异常错误  ', mainPreload)
+      printInfo('error', '预加载脚本抛出一个未处理的异常错误 err ', err)
     })
   }
 

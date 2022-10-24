@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { darkTheme } from 'naive-ui'
-import { getThemeSettings, getNaiveThemeOverrides } from './helpers'
+import { getNaiveThemeOverrides, getThemeSettings } from './helpers'
 
 export const useThemeStore = defineStore('theme-store', {
   state: () => getThemeSettings(),
@@ -16,7 +16,7 @@ export const useThemeStore = defineStore('theme-store', {
     },
     pageAnimateMode(state) {
       return state.page.animate ? state.page.animateMode : undefined
-    }
+    },
   },
   actions: {
     /** 重置theme状态 */
@@ -33,9 +33,8 @@ export const useThemeStore = defineStore('theme-store', {
     },
     /** 自动跟随系统主题 */
     autoFollowSystemMode(darkMode: boolean) {
-      if (this.followSystemTheme) {
+      if (this.followSystemTheme)
         this.darkMode = darkMode
-      }
     },
     /** 切换/关闭 暗黑模式 */
     toggleDarkMode() {
@@ -67,9 +66,8 @@ export const useThemeStore = defineStore('theme-store', {
     },
     /** 设置头部高度 */
     setHeaderHeight(height: number | null) {
-      if (height) {
+      if (height)
         this.header.height = height
-      }
     },
     /** 设置头部面包屑可见 */
     setHeaderCrumbVisible(visible: boolean) {
@@ -85,9 +83,8 @@ export const useThemeStore = defineStore('theme-store', {
     },
     /** 设置多页签高度 */
     setTabHeight(height: number | null) {
-      if (height) {
+      if (height)
         this.tab.height = height
-      }
     },
     /** 设置多页签缓存 */
     setTabIsCache(isCache: boolean) {
@@ -95,9 +92,8 @@ export const useThemeStore = defineStore('theme-store', {
     },
     /** 侧边栏宽度 */
     setSiderWidth(width: number | null) {
-      if (width) {
+      if (width)
         this.sider.width = width
-      }
     },
     /** 侧边栏折叠时的宽度 */
     setSiderCollapsedWidth(width: number) {
@@ -105,9 +101,8 @@ export const useThemeStore = defineStore('theme-store', {
     },
     /** vertical-mix模式下侧边栏宽度 */
     setMixSiderWidth(width: number | null) {
-      if (width) {
+      if (width)
         this.sider.mixWidth = width
-      }
     },
     /** vertical-mix模式下侧边栏折叠时的宽度 */
     setMixSiderCollapsedWidth(width: number) {
@@ -128,6 +123,6 @@ export const useThemeStore = defineStore('theme-store', {
     /** 设置切换页面时是否过渡动画 */
     setPageIsAnimate(animate: boolean) {
       this.page.animate = animate
-    }
-  }
+    },
+  },
 })

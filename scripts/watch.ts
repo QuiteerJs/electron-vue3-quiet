@@ -1,9 +1,9 @@
+import type { ChildProcessWithoutNullStreams } from 'child_process'
 import { $, path } from 'zx'
 import { watch } from 'rollup'
-import getOption from './rollup.config'
 import { config as getEnv } from 'dotenv'
 import electron from 'electron'
-import type { ChildProcessWithoutNullStreams } from 'child_process'
+import getOption from './rollup.config'
 
 const [, , port] = process.argv
 const { parsed: globalEnv } = getEnv({ path: path.resolve(process.cwd(), '.env') })
@@ -12,16 +12,15 @@ const mainOptions = getOption({ ...devEnv, ...globalEnv, PORT: port } as unknown
 
 const watcher = watch(mainOptions)
 
-watcher.on('change', filename => {
-  console.log(`主进程文件变更`, filename)
+watcher.on('change', (filename) => {
+  console.log('主进程文件变更', filename)
 })
 
-watcher.on('event', async event => {
-  if (event.code === 'END') {
+watcher.on('event', async (event) => {
+  if (event.code === 'END')
     startElectron()
-  } else if (event.code === 'ERROR') {
+  else if (event.code === 'ERROR')
     process.exit(1)
-  }
 })
 
 let electronProcess: ChildProcessWithoutNullStreams | null
@@ -40,7 +39,7 @@ function startElectron() {
 
   const mainPath = path.resolve(__dirname, '../dist/main.js')
 
-  electronProcess = $.spawn(electron as any, [mainPath, `--inspect=9528`])
+  electronProcess = $.spawn(electron as any, [mainPath, '--inspect=9528'])
 
   electronProcess.stdout.on('data', removeJunk)
 
@@ -52,13 +51,16 @@ function startElectron() {
 }
 
 function removeJunk(chunk: string) {
-  if (/\d+-\d+-\d+ \d+:\d+:\d+\.\d+ Electron(?: Helper)?\[\d+:\d+] /.test(chunk)) return false
-  if (/\[\d+:\d+\/|\d+\.\d+:ERROR:CONSOLE\(\d+\)\]/.test(chunk)) return false
-  if (/ALSA lib [a-z]+\.c:\d+:\([a-z_]+\)/.test(chunk)) return false
+  if (/\d+-\d+-\d+ \d+:\d+:\d+\.\d+ Electron(?: Helper)?\[\d+:\d+] /.test(chunk))
+    return false
+  if (/\[\d+:\d+\/|\d+\.\d+:ERROR:CONSOLE\(\d+\)\]/.test(chunk))
+    return false
+  if (/ALSA lib [a-z]+\.c:\d+:\([a-z_]+\)/.test(chunk))
+    return false
 
   const data = chunk.toString().split(/\r?\n/)
   let log = ''
-  data.forEach(line => {
+  data.forEach((line) => {
     log += `  ${line}\n`
   })
   console.log(log)

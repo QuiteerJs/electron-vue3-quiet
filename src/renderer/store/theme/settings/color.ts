@@ -13,7 +13,7 @@ interface TraditionColor {
 export const traditionColors = colorJson as TraditionColor[]
 
 export function isInTraditionColors(color: string) {
-  return traditionColors.some(item => {
+  return traditionColors.some((item) => {
     const flag = item.data.some(v => v.color === color)
     return flag
   })

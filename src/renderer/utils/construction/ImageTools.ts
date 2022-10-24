@@ -8,7 +8,8 @@ export class ImageTools {
           let canvas: HTMLCanvasElement | null = document.createElement('canvas')
           const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d')
 
-          if (!ctx || !img) return
+          if (!ctx || !img)
+            return
 
           canvas.width = img.width
           canvas.height = img.height
@@ -20,14 +21,15 @@ export class ImageTools {
         }
 
         img.onerror = () => {
-          reject(`图片加载失败或该地址无法解析为base64 ==> ${localPath}`)
+          reject(new Error(`图片加载失败或该地址无法解析为base64 ==> ${localPath}`))
         }
       }
     })
   }
 
   static Base64toFile(base64: string, filename: string): File {
-    if (!base64.startsWith('data:')) return new File([], filename)
+    if (!base64.startsWith('data:'))
+      return new File([], filename)
 
     const [, str] = base64.split(',')
     const buff = Buffer.from(str, 'base64')

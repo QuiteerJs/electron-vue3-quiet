@@ -3,37 +3,37 @@ import type { RouteRecordRaw } from 'vue-router'
 export default [
   {
     name: 'loading',
-    path: `/loading`,
-    component: () => import('@/win/Loading/index.vue')
+    path: '/loading',
+    component: () => import('@/win/Loading/index.vue'),
   },
   {
     name: 'feel-brid',
-    path: `/feel-brid`,
-    component: () => import('@/win/FeelBrid/index.vue')
+    path: '/feel-brid',
+    component: () => import('@/win/FeelBrid/index.vue'),
   },
   {
     name: 'drop-demo',
-    path: `/drop-demo`,
-    component: () => import('@/win/DropDemo/index.vue')
+    path: '/drop-demo',
+    component: () => import('@/win/DropDemo/index.vue'),
   },
   {
     name: 'print-demo',
-    path: `/print-demo`,
-    component: () => import('@/win/PrintDemo/index.vue')
+    path: '/print-demo',
+    component: () => import('@/win/PrintDemo/index.vue'),
   },
   {
     name: 'sql-demo',
-    path: `/sql-demo`,
-    component: () => import('@/win/SqlDemo/index.vue')
+    path: '/sql-demo',
+    component: () => import('@/win/SqlDemo/index.vue'),
   },
   {
     name: 'download-demo',
-    path: `/download-demo`,
-    component: () => import('@/win/DownloadDemo')
+    path: '/download-demo',
+    component: () => import('@/win/DownloadDemo'),
   },
   {
     name: 'Font-demo',
-    path: `/Font-demo`,
-    component: () => import('@/win/FontDemo/index.vue')
-  }
+    path: '/Font-demo',
+    component: () => import('@/win/FontDemo/index.vue'),
+  },
 ] as RouteRecordRaw[]

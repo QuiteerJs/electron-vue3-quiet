@@ -9,16 +9,17 @@ export class EventEmitter {
   }
 
   static getInstance() {
-    if (!this._instance) {
+    if (!this._instance)
       return (this._instance = new EventEmitter())
-    }
+
     return this._instance
   }
 
   on(name: string, callback: () => void) {
     let fncs = this.cache.get(name)
 
-    if (!fncs) fncs = new Set()
+    if (!fncs)
+      fncs = new Set()
 
     fncs.add(callback)
 
@@ -30,13 +31,13 @@ export class EventEmitter {
   }
 
   emit(name: string, ...args: any[]) {
-    this.cache.get(name)?.forEach(callback => {
+    this.cache.get(name)?.forEach((callback) => {
       callback(...args)
     })
 
     const onceEvent = `once-${name}`
 
-    this.cache.get(onceEvent)?.forEach(callback => {
+    this.cache.get(onceEvent)?.forEach((callback) => {
       callback(...args)
     })
 

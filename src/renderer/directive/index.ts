@@ -6,9 +6,9 @@ const modules = import.meta.glob('./modules/*.ts', { eager: true })
 
 export default {
   install(app: App) {
-    Object.values(modules).forEach(item => {
+    Object.values(modules).forEach((item) => {
       const model = item as Model
       app.directive(model.default.name, model.default.directive)
     })
-  }
+  },
 }

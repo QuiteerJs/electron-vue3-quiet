@@ -1,8 +1,8 @@
 import { BrowserWindow, dialog, shell } from 'electron'
-import { addWin, delWin, onMounted, showChange, focusChange } from './win.map'
-import { WinKey } from '@enums/window'
-import { winURL, appIcon, trayIcon, mainPreload, printInfo } from '~/config/index'
-import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
+import type { WinKey } from '@enums/window'
+import { addWin, delWin, focusChange, onMounted, showChange } from './win.map'
+import { appIcon, mainPreload, printInfo, trayIcon, winURL } from '~/config/index'
+import { getMainEnv, mainDevExecFn, mainProExecFn } from '~/tools/index'
 
 const existWins = new Map<WinKey, CreateWindow>()
 
@@ -22,7 +22,8 @@ export class CreateWindow {
   constructor(key: WinKey, options: Electron.BrowserWindowConstructorOptions = {}) {
     if (existWins.has(key)) {
       existWins.get(key)
-    } else {
+    }
+    else {
       existWins.set(key, this)
 
       this.winKey = key
@@ -42,8 +43,8 @@ export class CreateWindow {
           // 允许跨域
           webSecurity: false,
           // 在macos中启用橡皮动画
-          scrollBounce: process.platform === 'darwin'
-        }
+          scrollBounce: process.platform === 'darwin',
+        },
       })
 
       getMainEnv(env => this.win.setIcon(env.NODE_ENV ? appIcon : trayIcon))
@@ -98,7 +99,7 @@ export class CreateWindow {
   setUserAgent() {
     mainProExecFn(() => {
       let userAgent = this.win.webContents.getUserAgent()
-      userAgent = userAgent.replace(/([^u4e00-\u9fa5])/g, $ => encodeURIComponent($))
+      userAgent = userAgent.replace(/([^u4e00-\u9FA5])/g, $ => encodeURIComponent($))
       this.win.webContents.setUserAgent(userAgent)
     })
 
@@ -109,7 +110,7 @@ export class CreateWindow {
     mainDevExecFn(() => {
       this.win.webContents.openDevTools({
         mode: 'undocked',
-        activate: true
+        activate: true,
       })
     })
 
@@ -128,7 +129,7 @@ export class CreateWindow {
 
   // 阻止窗口销毁使窗口隐藏
   unClose() {
-    this.win.on('close', event => {
+    this.win.on('close', (event) => {
       event.preventDefault()
       this.win.hide()
     })
@@ -142,7 +143,7 @@ export class CreateWindow {
 
   // 外链打开url
   openExternal() {
-    this.webContents.setWindowOpenHandler(event => {
+    this.webContents.setWindowOpenHandler((event) => {
       shell.openExternal(event.url)
       return { action: 'deny' }
     })
@@ -153,7 +154,7 @@ export class CreateWindow {
   #unresponsive() {
     // 网页变得未响应时触发
     this.win.on('unresponsive', () => {
-      printInfo('error', `网页未响应`)
+      printInfo('error', '网页未响应')
 
       dialog
         .showMessageBox(this.win, {
@@ -161,10 +162,11 @@ export class CreateWindow {
           title: '警告',
           buttons: ['重载', '退出'],
           message: '图形化进程失去响应，是否等待其恢复？',
-          noLink: true
+          noLink: true,
         })
-        .then(res => {
-          if (res.response === 0) this.win.reload()
+        .then((res) => {
+          if (res.response === 0)
+            this.win.reload()
           else this.win.close()
         })
     })
@@ -173,9 +175,9 @@ export class CreateWindow {
   // 当预加载脚本mainPreload抛出一个未处理的异常错误时触发。
   #preloadError() {
     this.win.webContents.on('preload-error', (event, mainPreload, err) => {
-      printInfo('error', `预加载脚本抛出一个未处理的异常错误 event `, event)
-      printInfo('error', `预加载脚本抛出一个未处理的异常错误 mainPreload `, mainPreload)
-      printInfo('error', `预加载脚本抛出一个未处理的异常错误 err `, err)
+      printInfo('error', '预加载脚本抛出一个未处理的异常错误 event ', event)
+      printInfo('error', '预加载脚本抛出一个未处理的异常错误 mainPreload ', mainPreload)
+      printInfo('error', '预加载脚本抛出一个未处理的异常错误 err ', err)
     })
   }
 

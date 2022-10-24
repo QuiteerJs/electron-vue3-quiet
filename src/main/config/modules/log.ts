@@ -1,5 +1,5 @@
+import { join } from 'path'
 import log from 'electron-log'
-import { join, resolve } from 'path'
 import { logsPath } from './paths'
 function getTime() {
   const time = new Date()
@@ -14,9 +14,8 @@ function getTime() {
 log.transports.file.resolvePath = () => join(logsPath, `${getTime()}`)
 
 export function printInfo(type: 'info' | 'error', info: string, value: any = '') {
-  if (typeof value === 'object') {
+  if (typeof value === 'object')
     value = JSON.stringify(value)
-  }
 
   switch (type) {
     case 'info':

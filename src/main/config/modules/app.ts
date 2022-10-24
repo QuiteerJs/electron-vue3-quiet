@@ -1,9 +1,9 @@
-import { app, dialog, session, powerSaveBlocker, BrowserWindow } from 'electron'
-import { addWin, hasWin, delWin, getWin, onMounted } from '~/window/create/win.map'
+import { BrowserWindow, app, dialog, powerSaveBlocker, session } from 'electron'
 import { WinKey } from '@enums/window'
-import { mainDevExecFn, mainProExecFn, getMainEnv } from '~/tools/index'
-import { printInfo } from './log'
-import { version, name } from '../../../../package.json'
+import { name } from '../../../../package.json'
+// import { printInfo } from './log'
+import { getWin, hasWin } from '~/window/create/win.map'
+import { getMainEnv, mainDevExecFn, mainProExecFn } from '~/tools/index'
 
 class CreateApp {
   private static _instance: CreateApp | null = null
@@ -14,11 +14,10 @@ class CreateApp {
   }
 
   static getInstance() {
-    if (!this._instance) {
+    if (!this._instance)
       return (this._instance = new CreateApp())
-    } else {
+    else
       return this._instance
-    }
   }
 
   use(callback: () => void) {
@@ -29,37 +28,39 @@ class CreateApp {
 
   installDevtools() {
     app.whenReady().then(() => {
-      mainDevExecFn(() => {
+      mainDevExecFn(async () => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const { VUEJS3_DEVTOOLS } = require('electron-devtools-vendor')
+        console.log('VUEJS3_DEVTOOLS: ', VUEJS3_DEVTOOLS)
         session.defaultSession.loadExtension(VUEJS3_DEVTOOLS, {
-          allowFileAccess: true
+          allowFileAccess: true,
         })
       })
     })
   }
 
   private init() {
-    getMainEnv(env => {
+    getMainEnv((env) => {
       app.setName(env.NODE_ENV ? `dev-${name}` : name)
     })
 
     // console.log('app.requestSingleInstanceLock(): ', app.requestSingleInstanceLock())
 
     if (app.requestSingleInstanceLock()) {
-      app.on('second-instance', (event, commandLine, workingDirectory) => {
+      app.on('second-instance', () => {
         hasWin(WinKey.MAIN) && getWin(WinKey.MAIN)?.show()
       })
-    } else {
+    }
+    else {
       mainProExecFn(app.quit)
     }
 
     app.on('activate', () => {
       const allWin = BrowserWindow.getAllWindows()
-      if (allWin.length) {
+      if (allWin.length)
         allWin.map(win => win.show())
-      } else {
+      else
         this.readyList.forEach(fn => fn())
-      }
     })
 
     app.whenReady().then(() => {
@@ -96,7 +97,7 @@ class CreateApp {
       const message = {
         title: '',
         buttons: [],
-        message: ''
+        message: '',
       }
       switch (details.type) {
         case 'GPU':
@@ -123,17 +124,19 @@ class CreateApp {
           title: message.title,
           buttons: message.buttons,
           message: message.message,
-          noLink: true
+          noLink: true,
         })
-        .then(res => {
+        .then((res) => {
           // 当显卡出现崩溃现象时使用该设置禁用显卡加速模式。
           if (res.response === 0) {
-            if (details.type === 'GPU') app.disableHardwareAcceleration()
+            if (details.type === 'GPU')
+              app.disableHardwareAcceleration()
             app.relaunch({
-              args: process.argv.slice(1).concat(['--relaunch'])
+              args: process.argv.slice(1).concat(['--relaunch']),
             })
             app.exit(0)
-          } else {
+          }
+          else {
             app.exit(0)
           }
         })

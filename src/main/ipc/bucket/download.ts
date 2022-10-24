@@ -6,7 +6,8 @@ export const ipcBus = new Map<string, (event: Electron.IpcMainInvokeEvent, optio
 ipcBus.set('file', async (event, options: Download.DownloadOptions) => {
   const win = BrowserWindow.fromWebContents(event.sender)
 
-  if (!win) return
+  if (!win)
+    return
 
   const download = new Downloader(win, options)
   const details: Download.DownloadDetails = await download.start()

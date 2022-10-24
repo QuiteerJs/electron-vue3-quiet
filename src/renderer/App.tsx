@@ -1,4 +1,4 @@
-import { zhCN, dateZhCN } from 'naive-ui'
+import { dateZhCN, zhCN } from 'naive-ui'
 import { RouterView } from 'vue-router'
 import { useThemeStore } from '@/store'
 import { subTheme } from '@/store/theme/subTheme'
@@ -27,5 +27,5 @@ export default defineComponent({
         </n-notification-provider>
       </n-config-provider>
     )
-  }
+  },
 })

@@ -1,3 +1,22 @@
+<script lang="ts" setup>
+import IpcOnMounted from '@/components/IpcOnMounted'
+
+const animation = ref<HTMLDivElement>()
+let i = 1
+onMounted(() => {
+  const show = () => {
+    if (i < 100) {
+      setTimeout(() => {
+        animation.value && (animation.value.style.opacity = String(i / 100))
+        i += 2
+        show()
+      }, 50)
+    }
+  }
+  show()
+})
+</script>
+
 <template>
   <IpcOnMounted />
   <div ref="animation" class="poster">
@@ -5,7 +24,9 @@
       <span class="prefix-text">S</span>TAND BY M
       <span class="suffix-text">E</span>
     </h1>
-    <h4 class="sub-title">DORAEMON</h4>
+    <h4 class="sub-title">
+      DORAEMON
+    </h4>
     <div class="doraemon">
       <!-- 脸部 -->
       <div class="header" />
@@ -50,29 +71,6 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'Loading'
-}
-</script>
-<script lang="ts" setup>
-import IpcOnMounted from '@/components/IpcOnMounted'
-
-const animation = ref<HTMLDivElement>()
-let i = 1
-onMounted(() => {
-  const show = () => {
-    if (i < 100) {
-      setTimeout(() => {
-        animation.value && (animation.value.style.opacity = String(i / 100))
-        i += 2
-        show()
-      }, 50)
-    }
-  }
-  show()
-})
-</script>
 
 <style lang="scss" scoped>
 .poster {
