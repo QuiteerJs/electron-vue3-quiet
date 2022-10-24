@@ -13,6 +13,7 @@ const mainOptions = getOption({ ...devEnv, ...globalEnv, PORT: port } as unknown
 const watcher = watch(mainOptions)
 
 watcher.on('change', (filename) => {
+  // eslint-disable-next-line no-console
   console.log('主进程文件变更', filename)
 })
 
@@ -63,5 +64,6 @@ function removeJunk(chunk: string) {
   data.forEach((line) => {
     log += `  ${line}\n`
   })
+  // eslint-disable-next-line no-console
   console.log(log)
 }

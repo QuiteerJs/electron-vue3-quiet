@@ -1,6 +1,6 @@
 {
   "extends": "@antfu",
 	"rules": {
-		"no-console": ["warn", { "allow": ["warn", "error"] }]
+		"no-console": ["warn", { "allow": ["warn", "error","time","timeEnd"] }]
 	}
 }

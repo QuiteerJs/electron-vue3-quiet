@@ -8,10 +8,13 @@ interface LogInfo {
 
 export function colorLog(name: string) {
   const logo = `  ${name}  `
+  // eslint-disable-next-line no-console
   const doneLog = (info: string) => console.log(`\n${chalk.bgGreen.white(logo)} ${info}`)
 
+  // eslint-disable-next-line no-console
   const errorLog = (info: string) => console.log(`\n${chalk.bgRed.white(logo)} ${info}`)
 
+  // eslint-disable-next-line no-console
   const okayLog = (info: string) => console.log(`\n${chalk.bgBlue.white(logo)} ${info}`)
 
   const timeKey = (info: string) => `\n${chalk.bgBlue.white(logo)} 本次 ${info} 用时为`

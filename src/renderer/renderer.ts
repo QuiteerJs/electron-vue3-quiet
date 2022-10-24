@@ -1,6 +1,4 @@
 import 'virtual:windi.css'
-// 通用字体
-import 'vfonts/Lato.css'
 import './styles/index.css'
 
 import { createApp } from 'vue'

@@ -24,8 +24,6 @@
     "types": [
       "node",
       "vite/client",
-      "vitest",
-      "vitest/globals",
       "naive-ui/volar",
       "unplugin-icons/types/vue"
     ],
@@ -37,6 +35,6 @@
     },
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src", "build", "scripts", "test", "vite.config.ts", "vitest.config.ts"],
+  "include": ["src", "build", "scripts", "test", "vite.config.ts"],
   "exclude": ["node_modules"]
 }
