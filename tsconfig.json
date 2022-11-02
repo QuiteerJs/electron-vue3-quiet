@@ -25,7 +25,8 @@
       "node",
       "vite/client",
       "naive-ui/volar",
-      "unplugin-icons/types/vue"
+      "unplugin-icons/types/vue",
+      "unplugin-vue-macros/macros-global"
     ],
     "paths": {
       "@common/*": ["src/common/*"],
