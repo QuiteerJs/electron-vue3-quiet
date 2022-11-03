@@ -26,10 +26,10 @@ const directive: Directive<HTMLElement, Fn | Params> = {
       }
     })
     observer.observe(el)
-  },
+  }
 }
 
 export default {
   name: 'intersecting',
-  directive,
+  directive
 }

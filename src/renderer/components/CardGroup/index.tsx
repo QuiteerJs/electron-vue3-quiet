@@ -1,13 +1,15 @@
 import type { PropType } from 'vue'
 
+const props = {
+  cardList: {
+    type: Array as PropType<Component.CardState[]>,
+    default: () => []
+  }
+}
+
 export default defineComponent({
   name: 'CardGroup',
-  props: {
-    cardList: {
-      type: Array as PropType<Component.CardState[]>,
-      default: () => [],
-    },
-  },
+  props,
   setup(props) {
     const { cardList } = props
 
@@ -31,5 +33,5 @@ export default defineComponent({
         })}
       </div>
     )
-  },
+  }
 })

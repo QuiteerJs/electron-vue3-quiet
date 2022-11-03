@@ -33,7 +33,7 @@ class CreateApp {
         const { VUEJS3_DEVTOOLS } = require('electron-devtools-vendor')
         console.log('VUEJS3_DEVTOOLS: ', VUEJS3_DEVTOOLS)
         session.defaultSession.loadExtension(VUEJS3_DEVTOOLS, {
-          allowFileAccess: true,
+          allowFileAccess: true
         })
       })
     })
@@ -97,7 +97,7 @@ class CreateApp {
       const message = {
         title: '',
         buttons: [],
-        message: '',
+        message: ''
       }
       switch (details.type) {
         case 'GPU':
@@ -124,7 +124,7 @@ class CreateApp {
           title: message.title,
           buttons: message.buttons,
           message: message.message,
-          noLink: true,
+          noLink: true
         })
         .then((res) => {
           // 当显卡出现崩溃现象时使用该设置禁用显卡加速模式。
@@ -132,7 +132,7 @@ class CreateApp {
             if (details.type === 'GPU')
               app.disableHardwareAcceleration()
             app.relaunch({
-              args: process.argv.slice(1).concat(['--relaunch']),
+              args: process.argv.slice(1).concat(['--relaunch'])
             })
             app.exit(0)
           }

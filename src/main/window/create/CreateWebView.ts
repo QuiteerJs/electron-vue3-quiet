@@ -37,8 +37,8 @@ export class CreateWebView {
         // 允许跨域
         webSecurity: false,
         // 在macos中启用橡皮动画
-        scrollBounce: process.platform === 'darwin',
-      },
+        scrollBounce: process.platform === 'darwin'
+      }
     })
 
     this.win.setMenuBarVisibility(false)
@@ -53,8 +53,8 @@ export class CreateWebView {
         // 允许跨域
         webSecurity: false,
         // 在macos中启用橡皮动画
-        scrollBounce: process.platform === 'darwin',
-      },
+        scrollBounce: process.platform === 'darwin'
+      }
     })
 
     this.win.setBrowserView(this.view)
@@ -63,7 +63,7 @@ export class CreateWebView {
       width: true,
       height: true,
       horizontal: true,
-      vertical: true,
+      vertical: true
     })
     this.view.setBounds({ x: 0, y: 0, width: 960, height: 600 })
 
@@ -84,7 +84,7 @@ export class CreateWebView {
 
       const icon = nativeImage.createFromBuffer(Buffer.from(res.data), {
         width: 128,
-        height: 128,
+        height: 128
       })
 
       this.win.setIcon(icon)
@@ -158,7 +158,7 @@ export class CreateWebView {
           title: '警告',
           buttons: ['重载', '退出'],
           message: '图形化进程失去响应，是否等待其恢复？',
-          noLink: true,
+          noLink: true
         })
         .then((res) => {
           if (res.response === 0)

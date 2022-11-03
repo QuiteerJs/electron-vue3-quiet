@@ -17,7 +17,7 @@ export function subTheme() {
     (newValue) => {
       console.log('newValue: ', newValue)
     },
-    { immediate: true },
+    { immediate: true }
   )
 
   // 监听naiveUI themeOverrides
@@ -27,7 +27,7 @@ export function subTheme() {
       if (newValue.common)
         addThemeCssVarsToHtml(newValue.common)
     },
-    { immediate: true },
+    { immediate: true }
   )
 
   // 监听暗黑模式
@@ -40,8 +40,8 @@ export function subTheme() {
         removeDarkClass()
     },
     {
-      immediate: true,
-    },
+      immediate: true
+    }
   )
 
   // 监听操作系统主题模式
@@ -51,7 +51,7 @@ export function subTheme() {
       const isDark = newValue === 'dark'
       theme.autoFollowSystemMode(isDark)
     },
-    { immediate: true },
+    { immediate: true }
   )
 
   // 禁用横向滚动(页面切换时,过渡动画会产生水平方向的滚动条, 小于最小宽度时，不禁止)
@@ -82,7 +82,7 @@ function handleCssDarkMode() {
   }
   return {
     addDarkClass,
-    removeDarkClass,
+    removeDarkClass
   }
 }
 

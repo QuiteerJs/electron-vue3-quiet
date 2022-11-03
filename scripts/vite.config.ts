@@ -16,12 +16,12 @@ export default defineConfig((configEnv) => {
       minify: 'esbuild',
       reportCompressedSize: false,
       emptyOutDir: false,
-      chunkSizeWarningLimit: 2000,
+      chunkSizeWarningLimit: 2000
     },
     server: {
-      host: '0.0.0.0',
+      host: '0.0.0.0'
     },
     plugins: [...setupVitePlugins(configEnv, renderer)],
-    publicDir: resolve(root, 'public'),
+    publicDir: resolve(root, 'public')
   }
 })

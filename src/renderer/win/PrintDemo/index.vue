@@ -12,7 +12,7 @@ const margins = ref({
   top: 0,
   bottom: 0,
   left: 0,
-  right: 0,
+  right: 0
 })
 const pageSizeString = ref<string>('A4')
 const pageSizeOptions = ref(['A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'])
@@ -38,7 +38,7 @@ async function print() {
       printBackground: printBackground.value,
       color: color.value,
       margins: toRaw(margins.value),
-      pageSize: selPageSizeType.value === 0 ? toRaw(pageSizeString.value) : toRaw(pageSizeObject.value),
+      pageSize: selPageSizeType.value === 0 ? toRaw(pageSizeString.value) : toRaw(pageSizeObject.value)
     })
     // console.info(printRes)
   }

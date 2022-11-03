@@ -28,5 +28,5 @@ export default defineComponent({
         </div>
       </>
     )
-  },
+  }
 })

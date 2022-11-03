@@ -66,16 +66,16 @@ async function fetchFile(path: string) {
     const res = await fetch(path)
     const blob = await res.blob()
 
-    console.log(
+    window.console.log(
       JSON.stringify(
         {
           type: blob.type,
           size: blob.size,
-          path,
+          path
         },
         null,
-        2,
-      ),
+        2
+      )
     )
   }
   catch (err) {

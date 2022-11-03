@@ -52,23 +52,23 @@ class TrayInit {
               this.tray.setImage(flag ? hideIcon : trayIcon)
               flag = !flag
             }, 600)
-          },
+          }
         },
         {
           label: '重启',
           click: () => {
             app.relaunch({
-              args: process.argv.slice(1).concat(['--relaunch']),
+              args: process.argv.slice(1).concat(['--relaunch'])
             })
             app.exit(0)
-          },
+          }
         },
         {
           label: '退出',
           click: () => {
             app.exit(0)
-          },
-        },
+          }
+        }
       ])
       this.tray.popUpContextMenu(menuConfig)
     })

@@ -10,5 +10,5 @@ const directive: Directive<HTMLElement, number> = (el, binding) => {
 
 export default {
   name: 'ellipsis',
-  directive,
+  directive
 }

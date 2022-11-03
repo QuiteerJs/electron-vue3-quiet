@@ -9,5 +9,5 @@ export const AppDataSource = new DataSource({
   logging: false,
   entities: [User],
   migrations: [],
-  subscribers: [],
+  subscribers: []
 })

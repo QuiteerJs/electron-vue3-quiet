@@ -10,5 +10,5 @@ export default {
       const model = item as Model
       app.directive(model.default.name, model.default.directive)
     })
-  },
+  }
 }

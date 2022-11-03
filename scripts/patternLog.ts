@@ -24,7 +24,7 @@ export function colorLog(name: string) {
     doneLog,
     errorLog,
     okayLog,
-    timeKey,
+    timeKey
   }
 }
 

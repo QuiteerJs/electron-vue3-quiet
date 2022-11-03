@@ -13,7 +13,7 @@ const config: Configuration = {
   productName: name,
   protocols: {
     name,
-    schemes: ['deeplink'],
+    schemes: ['deeplink']
   },
   nsis: {
     oneClick: false,
@@ -24,18 +24,18 @@ const config: Configuration = {
     runAfterFinish: true,
     createDesktopShortcut: true,
     createStartMenuShortcut: true,
-    artifactName: `${name} \${arch} Setup ${version}.\${ext}`,
+    artifactName: `${name} \${arch} Setup ${version}.\${ext}`
   },
   files: ['dist/**/*'],
   extraFiles: ['lib'],
   directories: {
-    output: 'out',
+    output: 'out'
   },
   publish: [
     {
       provider: 'generic',
-      url: 'http://127.0.0.1',
-    },
+      url: 'http://127.0.0.1'
+    }
   ],
   dmg: {
     contents: [
@@ -43,14 +43,14 @@ const config: Configuration = {
         x: 410,
         y: 150,
         type: 'link',
-        path: '/Applications',
+        path: '/Applications'
       },
       {
         x: 130,
         y: 150,
-        type: 'file',
-      },
-    ],
+        type: 'file'
+      }
+    ]
   },
   mac: { icon: 'icons/icon.icns' },
   win: { icon: 'icons/icon.ico', target: 'nsis' },
@@ -60,9 +60,9 @@ const config: Configuration = {
     desktop: {
       StartupNotify: 'false',
       Encoding: 'UTF-8',
-      MimeType: 'x-scheme-handler/deeplink',
-    },
-  },
+      MimeType: 'x-scheme-handler/deeplink'
+    }
+  }
 }
 
 export default (isDefault: boolean, options?: BuilderOptions): CliOptions => {
@@ -85,6 +85,6 @@ export default (isDefault: boolean, options?: BuilderOptions): CliOptions => {
 
   return {
     ...rawOptions,
-    dir: !isCreateExe,
+    dir: !isCreateExe
   }
 }

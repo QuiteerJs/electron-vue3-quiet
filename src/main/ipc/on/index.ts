@@ -7,7 +7,7 @@ const busCallback = (
   ipcBus: Map<string, (event: Electron.IpcMainEvent, options: any) => any>,
   event: Electron.IpcMainEvent,
   type: string,
-  args: any[],
+  args: any[]
 ) => {
   const performFunc = ipcBus.get(type)
   if (performFunc instanceof Function)

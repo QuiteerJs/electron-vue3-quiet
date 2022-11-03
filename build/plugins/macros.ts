@@ -6,6 +6,6 @@ import VueJsx from '@vitejs/plugin-vue-jsx'
 export default VueMacros({
   plugins: {
     vue: Vue(),
-    vueJsx: VueJsx(), // if needed
-  },
+    vueJsx: VueJsx() // if needed
+  }
 })

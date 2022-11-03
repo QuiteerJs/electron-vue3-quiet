@@ -1,6 +1,6 @@
 export const enum StoreKey {
   TokenKey = 'access_token',
-  UserKey = 'user_info',
+  UserKey = 'user_info'
 }
 
 export const getToken = () => localStorage.getItem(StoreKey.TokenKey)

@@ -56,15 +56,15 @@ const inquirerCli = async () => {
           {
             name: 'linux',
             value: 'armv7l',
-            disabled: !(isLiunx || isMac),
+            disabled: !(isLiunx || isMac)
           },
           {
             name: 'all',
             value: 'universal',
-            disabled: !isMac,
-          },
-        ],
-      },
+            disabled: !isMac
+          }
+        ]
+      }
     ])
     .catch((err) => {
       console.log('err: ', err)
@@ -76,7 +76,7 @@ const inquirerCli = async () => {
     isClearness: !isClearness,
     isCreateExe,
     isAsar,
-    pattern,
+    pattern
   }
 }
 
@@ -84,7 +84,7 @@ const optionsBuildCli = async () => {
   await runnerLog(() => $`rimraf dist && rimraf out`, {
     name: 'rimraf',
     info: '清除 dist & out 目录 成功',
-    timeKey: '清除',
+    timeKey: '清除'
   })
 
   const { isTypecheck, isClearness, isCreateExe, isAsar, pattern } = await inquirerCli()
@@ -95,14 +95,14 @@ const optionsBuildCli = async () => {
     await runnerLog(() => $`vue-tsc --noEmit --skipLibCheck`, {
       name: 'vue-tsc',
       info: '完成ts类型检查',
-      timeKey: 'ts类型检查',
+      timeKey: 'ts类型检查'
     })
   }
 
   await runnerLog(() => $`vite build --config scripts/vite.config.ts`, {
     name: 'vite',
     info: '完成渲染进程代码构建',
-    timeKey: '构建',
+    timeKey: '构建'
   })
 
   // 启动环境变量
@@ -114,14 +114,14 @@ const optionsBuildCli = async () => {
   await runnerLog(() => rollupBuild.write(rollupConfig.output as OutputOptions), {
     name: 'rollup',
     info: '完成主进程代码构建',
-    timeKey: '构建',
+    timeKey: '构建'
   })
 
   const builderConfig = getBuilderConfig(false, { isCreateExe, isAsar, archs: pattern })
   await runnerLog(() => build(builderConfig), {
     name: 'electron-build',
     info: '输出可执行程序成功',
-    timeKey: '安装包',
+    timeKey: '安装包'
   })
 
   console.timeEnd(allLog.timeKey('命令行执行'))

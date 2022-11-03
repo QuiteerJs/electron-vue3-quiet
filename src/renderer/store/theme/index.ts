@@ -16,7 +16,7 @@ export const useThemeStore = defineStore('theme-store', {
     },
     pageAnimateMode(state) {
       return state.page.animate ? state.page.animateMode : undefined
-    },
+    }
   },
   actions: {
     /** 重置theme状态 */
@@ -123,6 +123,6 @@ export const useThemeStore = defineStore('theme-store', {
     /** 设置切换页面时是否过渡动画 */
     setPageIsAnimate(animate: boolean) {
       this.page.animate = animate
-    },
-  },
+    }
+  }
 })

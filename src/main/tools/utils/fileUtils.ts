@@ -1,5 +1,5 @@
 import type {
-  Stats,
+  Stats
 } from 'fs'
 import {
   access,
@@ -16,7 +16,7 @@ import {
   statSync,
   unlink,
   unlinkSync,
-  writeFile,
+  writeFile
 } from 'fs'
 import ElectronLog from 'electron-log'
 import axios from 'axios'
@@ -46,7 +46,7 @@ export class FileUtils {
       axios({
         method: 'get',
         url: sourcePath,
-        responseType: 'stream',
+        responseType: 'stream'
       })
         .then((response) => {
           try {

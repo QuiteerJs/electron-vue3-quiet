@@ -31,7 +31,7 @@ function getThemeColors(colors: [ColorType, string][]) {
     { scene: 'Suppl', handler: color => color },
     { scene: 'Hover', handler: color => getColorPalette(color, 5) },
     { scene: 'Pressed', handler: color => getColorPalette(color, 7) },
-    { scene: 'Active', handler: color => addColorAlpha(color, 0.1) },
+    { scene: 'Active', handler: color => addColorAlpha(color, 0.1) }
   ]
 
   const themeColor: ThemeColor = {}
@@ -58,17 +58,17 @@ export function getNaiveThemeOverrides(colors: Record<ColorType, string>): Globa
     ['info', info],
     ['success', success],
     ['warning', warning],
-    ['error', error],
+    ['error', error]
   ])
 
   const colorLoading = primary
 
   return {
     common: {
-      ...themeColors,
+      ...themeColors
     },
     LoadingBar: {
-      colorLoading,
-    },
+      colorLoading
+    }
   }
 }

@@ -14,7 +14,7 @@ const busCallback = (
   ipcBus: Map<string, (event: Electron.IpcMainInvokeEvent, options: any) => any>,
   event: Electron.IpcMainInvokeEvent,
   type: string,
-  args: any[],
+  args: any[]
 ) => {
   const performFunc = ipcBus.get(type)
   if (performFunc instanceof Function)
@@ -54,7 +54,7 @@ export function initHandleIpc() {
 
     if (dllName) {
       const lib = Library(join(libPath, dllName), {
-        add: ['int', ['int', 'int']],
+        add: ['int', ['int', 'int']]
       })
       // add (a: number, b: number) => (a + b)
       return lib.add(a, b)

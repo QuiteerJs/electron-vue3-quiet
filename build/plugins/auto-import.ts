@@ -10,12 +10,12 @@ export default (srcPath: string) => {
     Icons({
       compiler: 'vue3',
       customCollections: {
-        custom: FileSystemIconLoader(`${srcPath}/assets/svg`),
+        custom: FileSystemIconLoader(`${srcPath}/assets/svg`)
       },
       autoInstall: true,
       scale: 1,
       defaultClass: 'inline-block',
-      jsx: 'preact',
+      jsx: 'preact'
     }),
     AutoImport({
       dts: '../types/auto-imports.d.ts',
@@ -25,19 +25,19 @@ export default (srcPath: string) => {
         'vue-i18n',
         '@vueuse/core',
         {
-          'vue-router': ['RouterView', 'RouterLink'],
-        },
-      ],
+          'vue-router': ['RouterView', 'RouterLink']
+        }
+      ]
     }),
     Components({
       dts: '../types/components.d.ts',
       resolvers: [
         IconsResolver({
           customCollections: ['custom'],
-          componentPrefix: 'icon',
+          componentPrefix: 'icon'
         }),
-        NaiveUiResolver(),
-      ],
-    }),
+        NaiveUiResolver()
+      ]
+    })
   ]
 }

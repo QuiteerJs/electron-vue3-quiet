@@ -10,7 +10,7 @@ export const addWin = (key: WinKey, winId: number) => {
     isCreate: true,
     isRead: false,
     isShow: false,
-    isFocus: false,
+    isFocus: false
   })
 }
 

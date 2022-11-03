@@ -46,7 +46,7 @@ export class Downloader {
       state,
       isSuccess: state === 'completed',
       message,
-      progress,
+      progress
     }
   }
 
@@ -62,7 +62,7 @@ export class Downloader {
       time: this.getTime(),
       url: this.item.getURL(),
       savePath: this.item.savePath,
-      filename: this.item.getFilename(),
+      filename: this.item.getFilename()
     }
   }
 

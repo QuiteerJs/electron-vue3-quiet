@@ -10,7 +10,7 @@ enum ObjectString {
   regexp = '[object RegExp]',
   set = '[object Set]',
   map = '[object Map]',
-  file = '[object File]',
+  file = '[object File]'
 }
 
 export function isNumber(data: unknown) {

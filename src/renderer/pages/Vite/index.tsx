@@ -8,5 +8,5 @@ export default defineComponent({
         <div class="bg-light-800">这是vite</div>
       </>
     )
-  },
+  }
 })

@@ -16,15 +16,15 @@ const messages = Object.values(modules).reduce(
     const lang = (now as Model).default
     return {
       en: { ...pre.en, ...lang.en },
-      zh: { ...pre.zh, ...lang.zh },
+      zh: { ...pre.zh, ...lang.zh }
     }
   },
-  { en: {}, zh: {} },
+  { en: {}, zh: {} }
 )
 
 export default createI18n({
   // 使用 Composition API 模式，则需要将其设置为false
   legacy: false,
   locale: 'zh',
-  messages,
+  messages
 })

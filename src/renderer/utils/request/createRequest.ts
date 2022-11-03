@@ -36,7 +36,7 @@ class CustomAxiosInstance {
 
           resolve(data)
         }),
-      handleAxiosError,
+      handleAxiosError
     )
   }
 }
@@ -107,6 +107,6 @@ export function createRequest(axiosConfig: AxiosRequestConfig) {
     get,
     post,
     put,
-    delete: handleDelete,
+    delete: handleDelete
   }
 }

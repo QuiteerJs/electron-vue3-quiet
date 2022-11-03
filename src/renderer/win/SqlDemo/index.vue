@@ -6,7 +6,7 @@ const columns = ref<DataTableColumn<Sql.UserEntity>[]>([
   { title: 'id', key: 'id' },
   { title: 'name', key: 'name' },
   { title: 'sex', key: 'sex', render: row => String(row.sex) },
-  { title: 'age', key: 'age' },
+  { title: 'age', key: 'age' }
 ])
 
 const data = ref<Sql.UserEntity[]>([])
@@ -25,7 +25,7 @@ const add = async () => {
   const row: Sql.User = {
     name: `张三${n}`,
     sex: Boolean(n % 2),
-    age: n,
+    age: n
   }
   n++
   const res = await window.$ipc.invoke<Sql.User, boolean>('sql-option', 'user-add-single', row)

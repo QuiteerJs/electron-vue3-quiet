@@ -16,7 +16,7 @@ export function useDownload() {
       window.$ipc
         .invoke<Download.DownloadOptions, Download.DownloadDetails>('download-option', 'file', {
           ...optsions,
-          eventKey,
+          eventKey
         })
         .then((data) => {
           if (data.isSuccess)

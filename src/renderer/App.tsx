@@ -27,5 +27,5 @@ export default defineComponent({
         </n-notification-provider>
       </n-config-provider>
     )
-  },
+  }
 })

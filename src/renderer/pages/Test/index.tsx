@@ -48,12 +48,12 @@ export default defineComponent({
           // v-intersecting:hide={isIntersecting => showMsg('hide', 'warning')}
           v-intersecting={{
             show: () => showMsg('show', 'info'),
-            hide: () => showMsg('hide', 'warning'),
+            hide: () => showMsg('hide', 'warning')
           }}
           // v-intersecting={{ hide: isIntersecting => showMsg('hide', 'warning') }}
           v-text={'测试的哈斯大苏打'}
         />
       </>
     )
-  },
+  }
 })

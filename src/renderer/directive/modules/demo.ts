@@ -35,10 +35,10 @@ const directive: Directive<HTMLElement, number> = {
   // 绑定元素的父组件卸载之后调用
   unmounted() {
     // console.log('unmounted ', { el, binding, vnode, prevVnode })
-  },
+  }
 }
 
 export default {
   name: 'demo',
-  directive,
+  directive
 }

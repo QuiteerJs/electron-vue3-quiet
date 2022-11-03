@@ -4,7 +4,7 @@ export default defineComponent({
   setup() {
     const msg = ref<string>('msg')
     return {
-      msg,
+      msg
     }
   },
   expose: ['msg'],
@@ -17,7 +17,7 @@ export default defineComponent({
         {this.msg}
         {withDirectives(el, [
           [resolveDirective('demo')!, () => 1, 'value', { suffix: true }],
-          [resolveDirective('ellipsis')!, 1],
+          [resolveDirective('ellipsis')!, 1]
         ])}
         <div>
           <slot />
@@ -29,5 +29,5 @@ export default defineComponent({
         <div>{footerSlot}</div>
       </div>
     )
-  },
+  }
 })

@@ -22,7 +22,7 @@ export async function handleAxiosError(axiosError: AxiosError) {
   const err = {
     status: axiosError.response?.status,
     code: axiosError.code,
-    message: axiosError.message,
+    message: axiosError.message
   }
 
   for (const key in err) showMessage(err[key], axiosError)

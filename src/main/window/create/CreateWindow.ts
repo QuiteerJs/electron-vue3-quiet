@@ -43,8 +43,8 @@ export class CreateWindow {
           // 允许跨域
           webSecurity: false,
           // 在macos中启用橡皮动画
-          scrollBounce: process.platform === 'darwin',
-        },
+          scrollBounce: process.platform === 'darwin'
+        }
       })
 
       getMainEnv(env => this.win.setIcon(env.NODE_ENV ? appIcon : trayIcon))
@@ -110,7 +110,7 @@ export class CreateWindow {
     mainDevExecFn(() => {
       this.win.webContents.openDevTools({
         mode: 'undocked',
-        activate: true,
+        activate: true
       })
     })
 
@@ -162,7 +162,7 @@ export class CreateWindow {
           title: '警告',
           buttons: ['重载', '退出'],
           message: '图形化进程失去响应，是否等待其恢复？',
-          noLink: true,
+          noLink: true
         })
         .then((res) => {
           if (res.response === 0)
