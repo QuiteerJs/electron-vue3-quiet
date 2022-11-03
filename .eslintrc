@@ -1,6 +1,3 @@
 {
-  "extends": "@antfu",
-	"rules": {
-		"no-console": ["warn", { "allow": ["info","warn", "error","time","timeEnd"] }]
-	}
+  "extends": "@quiteer"
 }
