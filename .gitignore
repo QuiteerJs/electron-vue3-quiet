@@ -11,3 +11,4 @@ stats.html
 components.d.ts
 auto-imports.d.ts
 database.sqlite
+.DS_Store

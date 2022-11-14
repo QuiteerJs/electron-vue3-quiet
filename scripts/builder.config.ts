@@ -52,7 +52,7 @@ const config: Configuration = {
       }
     ]
   },
-  mac: { icon: 'icons/icon.icns' },
+  mac: { icon: 'icons/icon.icns', target: 'dmg' },
   win: { icon: 'icons/icon.ico', target: 'nsis' },
   linux: {
     target: ['AppImage', 'rpm', 'deb'],
