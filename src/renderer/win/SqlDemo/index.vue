@@ -1,8 +1,9 @@
-<script setup lang="ts">
-import type { DataTableColumn } from 'naive-ui'
+<script lang="ts" setup>
+import type { DataTableColumns } from 'naive-ui'
+import type { Ref } from 'vue'
 import IpcOnMounted from '@/components/IpcOnMounted'
 
-const columns = ref<DataTableColumn<Sql.UserEntity>[]>([
+const columns: Ref<DataTableColumns<Sql.UserEntity>> = ref([
   { title: 'id', key: 'id' },
   { title: 'name', key: 'name' },
   { title: 'sex', key: 'sex', render: row => String(row.sex) },
@@ -12,7 +13,7 @@ const columns = ref<DataTableColumn<Sql.UserEntity>[]>([
 const data = ref<Sql.UserEntity[]>([])
 
 const search = async () => {
-  const res = await window.$ipc.invoke<unknown, Sql.UserEntity[]>('sql-option', 'user-search-all')
+  const res = await window.$ipc.invoke<['user-search-all'], Sql.UserEntity[]>('sql-option', 'user-search-all')
   console.info('res: ', res)
   if (res) {
     window.$message.success('查询表成功!')
@@ -28,7 +29,7 @@ const add = async () => {
     age: n
   }
   n++
-  const res = await window.$ipc.invoke<Sql.User, boolean>('sql-option', 'user-add-single', row)
+  const res = await window.$ipc.invoke<['user-add-single', Sql.User], boolean>('sql-option', 'user-add-single', row)
   if (res)
     window.$message.success('添加行成功!')
   search()
