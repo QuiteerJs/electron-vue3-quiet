@@ -986,6 +986,16 @@
   resolved "https://registry.npmmirror.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
+"@quiteer/electron-ipc@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.npmmirror.com/@quiteer/electron-ipc/-/electron-ipc-0.1.0.tgz#19ccc80e7a1f88c330ff099f97b2695b6b922ce6"
+  integrity sha512-At8TkcMMQ3fNhKWkCGec5tEQBvmY8TLyCEUaXh+pbjV6tuBMqZzxVBuoxl+7myvGQikek4wlV2C73Ne6Qd0kmQ==
+
+"@quiteer/electron-preload@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.npmmirror.com/@quiteer/electron-preload/-/electron-preload-0.0.8.tgz#53dbd67faf2ee718ae257bd511cd89a3b4175574"
+  integrity sha512-rx3go+20VlH08sAa72/xnCLvNa+P5TT1G0mZpzUEd0/HuPCLBqPI8z7bGKS/4iAcfSHZu1Sgqeq3oJPCQZYVLQ==
+
 "@quiteer/eslint-config@^0.0.3":
   version "0.0.3"
   resolved "https://registry.npmmirror.com/@quiteer/eslint-config/-/eslint-config-0.0.3.tgz#cf63a9d5d89791c631c8d03ad96bedb2433f6031"

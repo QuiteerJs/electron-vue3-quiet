@@ -44,6 +44,8 @@
     }
   },
   "dependencies": {
+    "@quiteer/electron-ipc": "^0.1.0",
+    "@quiteer/electron-preload": "^0.0.8",
     "axios": "^0.27.2",
     "ffi-napi": "^4.0.3",
     "font-list": "^1.4.5",

@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { EventKeys, IpcWindowOptions } from '@quiteer/electron-ipc/web'
 
-const windowOpt = (type: string) => {
-  window.$ipc.send('window-option', type)
+const windowOpt = (type: IpcWindowOptions) => {
+  window.$ipc.send(EventKeys.WindowOptionsKey, type)
 }
 </script>
 
 <template>
   <div class="h-20px flex justify-end">
-    <div class="icon-item no-drag" @click="windowOpt('minimize')">
+    <div class="icon-item no-drag" @click="windowOpt(IpcWindowOptions.MINIMIZE)">
       <icon-ion:minus-round />
     </div>
-    <div class="icon-item no-drag" @click="windowOpt('maximize')">
+    <div class="icon-item no-drag" @click="windowOpt(IpcWindowOptions.MAXIMIZE)">
       <icon-fluent:maximize-20-filled />
     </div>
-    <div class="icon-item no-drag" @click="windowOpt('hide')">
+    <div class="icon-item no-drag" @click="windowOpt(IpcWindowOptions.HIDE)">
       <icon-ic:baseline-close />
     </div>
   </div>

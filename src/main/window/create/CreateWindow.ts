@@ -1,7 +1,8 @@
 import { BrowserWindow, dialog, shell } from 'electron'
 import type { WinKey } from '@enums/window'
+import preload from '@quiteer/electron-preload'
 import { addWin, delWin, focusChange, onMounted, showChange } from './win.map'
-import { appIcon, mainPreload, printInfo, trayIcon, winURL } from '~/config/index'
+import { appIcon, printInfo, trayIcon, winURL } from '~/config/index'
 import { getMainEnv, mainDevExecFn, mainProExecFn } from '~/tools/index'
 
 const existWins = new Map<WinKey, CreateWindow>()
@@ -37,7 +38,8 @@ export class CreateWindow {
         paintWhenInitiallyHidden: false,
         ...option,
         webPreferences: {
-          preload: mainPreload,
+          preload: preload as string,
+          sandbox: false,
           // 预加载选项
           ...preferences,
           // 允许跨域
